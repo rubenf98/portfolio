@@ -1,75 +1,120 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import Keywords from './HomeSections/Keywords';
+import Projects from './HomeSections/Projects';
+
+const scroll = keyframes`
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-100vw, 0, 0);
+  }
+`;
 
 const Container = styled.div`
-    max-width: 100%;
+    width: 100%;
     min-height: 100vh;
 `;
 
 const Row = styled.div`
-    display: flex;
-    justify-content: space-around;
-    width: 90%;
-    margin: auto;
+    position: sticky;
+    top: 0;
+    min-height: 70vh;
+
+    object-fit: fill;
+`;
+
+
+const TextContainer = styled.div`
+    z-index: 2;
+    
+    position: relative;
+    overflow: hidden;
+`;
+
+const HeadlineRow = styled.div`
+	position: relative;
+	display: flex;
+	margin-left: 0;
+	padding-left: 0;
+	justify-content: flex-start;
+	align-items: center;
+    animation: ${props => props.animation ? scroll : "none"} ;
+    animation-duration: 25s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    will-change: transform;
+    transform-style: preserve-3d;
+    z-index: 2;
+    color: #fae0c2;
+
+    &:first-child{
+        color: #c9f6f6
+    }
+
+`;
+
+const Headline = styled.span`
+	display: inline-block;
+	margin-top: 0;
+	margin-right: 4vw;
+	margin-bottom: 0;
+	flex-direction: row-reverse;
+	justify-content: flex-end;
+	align-items: stretch;
+	font-family: 'Grandslang b side','Palatino Linotype',sans-serif;
+	font-size: 12vw;
+	white-space: nowrap;
+	cursor: default;
+    z-index: 2;
 `;
 
 const ImageContainer = styled.div`
-    width: 40%;
-    position: relative;
+	position: relative;
+    display: flex;
+    overflow: hidden;
+    width: 65vw;
+    max-width: 100%;
+    padding-top: 0;
+    padding-bottom: 200px;
+    z-index: 1;
+    margin: auto;
 
-    .background {
+    img {
         width: 100%;
-        height: 680px;
-        background-color: #4b0707;
-
-        img {
-            position: absolute;
-        left: 0;
-        top: auto;
-        right: auto;
-        bottom: 0;
-        display: block;
-        height: 110%;
-        max-height: none;
-        max-width: none;
-        -webkit-box-flex: 0;
-        }
-    }
-
-    
-`;
-
-const InfoContainer = styled.div`
-    width: 50%;
-    color: rgb(228, 228, 228);
-
-    h1 {
-        
-        font-size: 50px;
-    }
-
-    h2 {
-        font-size: 36px;
+        border-radius: 20px;
     }
 `;
+
 
 function Homepage() {
 
     return (
-        <Container>
-            <Row>
-                <InfoContainer>
-                    <h1>Hello, I'm Rúben Freitas.</h1>
-                    <h2>Freelance Web Developer & Scientific Researcher from Madeira Island</h2>
-                </InfoContainer>
+        <div>
+            <Container>
+                <Row>
+                    <TextContainer>
+                        <HeadlineRow animation>
+                            <Headline>WEB-BASED SYSTEMS</Headline>
+                            <Headline>FREITAS</Headline>
+                        </HeadlineRow>
+                        <HeadlineRow animation>
+                            <Headline>RESEARCHER</Headline>
+                            <Headline>DEVELOPER</Headline>
+                            <Headline>ENGINEER</Headline>
+                        </HeadlineRow>
+                    </TextContainer>
+                </Row>
                 <ImageContainer>
-                    <div className='background' >
-                        <img src="/images/profile-pic.svg" />
-                    </div>
-
+                    <img src="/images/prof.jpg" loading="eager" />
                 </ImageContainer>
-            </Row>
-        </Container>
+
+
+            </Container>
+            <Keywords />
+            <Projects />
+        </div>
     );
 }
 

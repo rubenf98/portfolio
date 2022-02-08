@@ -4,10 +4,14 @@ import styled from 'styled-components';
 
 const Container = styled.div`
     width: 100%;
-    height: 100px;
+    height: 80px;
     position: static;
     top: 0;
-    text
+    padding: 50px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 100px;
 `;
 
 const Logo = styled(Link)`
@@ -28,13 +32,21 @@ const Logo = styled(Link)`
     }
 `;
 
+const ColorProfile = styled.div`
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    background: #f5f5f5;
+    cursor: pointer;
+`;
+
 function Navbar() {
     return (
         <Container>
             <Logo to="/">
-                <h1>Rúben Freitas</h1>
-                <div class="brand-logo-subtitle">Web-Developer & Researcher</div>
+                <h1>RF</h1>
             </Logo>
+            <ColorProfile />
         </Container>
     );
 }

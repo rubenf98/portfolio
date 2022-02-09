@@ -47,10 +47,10 @@ const HeadlineRow = styled.div`
     will-change: transform;
     transform-style: preserve-3d;
     z-index: 2;
-    color: #fae0c2;
+    color: #d4d0ca;
 
     &:first-child{
-        color: #c9f6f6
+        color: #f1f0d8
     }
 
 `;
@@ -77,13 +77,12 @@ const ImageContainer = styled.div`
     width: 65vw;
     max-width: 100%;
     padding-top: 0;
-    padding-bottom: 200px;
+    margin-bottom: 200px;
     z-index: 1;
     margin: auto;
 
     img {
         width: 100%;
-        border-radius: 20px;
     }
 `;
 

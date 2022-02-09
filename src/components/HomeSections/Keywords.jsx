@@ -3,11 +3,10 @@ import styled, { keyframes } from 'styled-components';
 
 const flash = keyframes`
   0% {
-    color: #fae0c2;
+    
     opacity: 0.1;
   }
   100% {
-    color: #ffffff;
     opacity: 1;
   }
 `;
@@ -17,12 +16,13 @@ const Container = styled.div`
     font-size: 26px;
     margin: 100px;
     padding: 20px 0;
+    margin: 150px auto;
     letter-spacing: .3vw;
     display: flex;
     justify-content: space-around;
     overflow: hidden;
     text-transform: uppercase;
-
+    color: #e4c180;
     span {
         animation: ${flash} 3s linear infinite;
 

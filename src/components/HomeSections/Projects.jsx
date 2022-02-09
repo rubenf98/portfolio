@@ -23,7 +23,7 @@ const ProjectList = styled.ul`
         font-family: 'Unna', serif;
         cursor: pointer;
         white-space: nowrap;
-        transition: color .3s cubic-bezier(.645,.045,.355,1);
+        
         text-align: right;
 
         .title {
@@ -31,10 +31,12 @@ const ProjectList = styled.ul`
             text-decoration: none;
             font-size: 90px;
             margin-bottom: 0px;
-            color: #959595;
+            color: #c3c3c3;
+            transition: color .3s cubic-bezier(.645,.045,.355,1);
+
                 &:hover {
-                color: #ffffff;
-            }
+                    color: #ffffff; 
+                }
         }
 
         span {
@@ -42,6 +44,7 @@ const ProjectList = styled.ul`
             margin-bottom: 140px;
             font-size: 22px;
             font-family: 'Zen Kurenaido', sans-serif;
+            
             
         }   
     }
@@ -61,43 +64,59 @@ const Project = styled.div`
 
 const ProjectVideo = styled.div`
     z-index: -2 ;
-    background: white;
     position: absolute;
-    height: 400px;
-    width: 700px;
+    padding: 60px;
+    box-sizing: border-box;
     top: 0;
     pointer-events: none;
     opacity: 1;
     will-change: transform;
     right: calc(-100% - 100px);
+    background: ${props => props.background};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0px;
+
+    video {
+        border-radius: inherit;
+        width: 600px;
+        height: auto;
+        display: block;
+        margin: auto;
+        box-shadow: 0 0 20px 0px rgba(0,0,0,.3);2
+    }
 `;
 
 
 
-const ProjectContainer = ({ name, description }) => (
-    <Project>
-        <ProjectVideo className="video-container" />
-        <li>
-            <Link className='title' to={"projects/" + name}>{name}</Link>
-            <span>{description}</span>
-        </li>
-    </Project>
-);
+const items = [
+    { name: "Wave Labs", description: "Interaquatic Dashboard", video: "wave", background: "#315aca" },
+    { name: "Marco Abreu", description: "Upholsterer & Decorator", video: "2", background: "#940000" },
+    { name: "Plaza II", description: "Condominium Management", video: "3", background: "#ff9100" },
+    { name: "Fast Rope Madeira", description: "Adventure Company For Outdoor Activities", video: "4", background: "#062781" },
+    { name: "Educadora Sénior", description: "Senior Educator", video: "5", background: "#cfcc20" },
+];
 
 function Projects() {
     return (
         <Container >
             <ProjectList >
-                <ProjectContainer name="Wave Labs" description="Interaquatic Dashboard" />
-                <ProjectContainer name="Marco Abreu" description="Upholsterer & Decorator" />
-                <ProjectContainer name="Plaza II" description="Condominium Management" />
-                <ProjectContainer name="Fast Rope Madeira" description="Adventure Company For Outdoor Activities" />
-                <ProjectContainer name="Educadora Sénior" description="Senior Educator" />
-                <ProjectContainer name="lorem ipsum" description="lorem ipsum" />
-                <ProjectContainer name="lorem ipsum" description="lorem ipsum" />
-                <ProjectContainer name="lorem ipsum" description="lorem ipsum" />
-                <ProjectContainer name="lorem ipsum" description="lorem ipsum" />
-                <ProjectContainer name="lorem ipsum" description="lorem ipsum" />
+                {items.map((item, index) => (
+                    <Project key={index}>
+                        <ProjectVideo background={item.background} className="video-container" >
+                            <video autoPlay loop>
+                                <source src={"/videos/" + item.video + ".mp4"} type="video/mp4" />
+                                <source src={"/videos/" + item.video + ".webm"} type="video/webm" />
+                                Your browser does not support the video tag.
+                            </video>
+                        </ProjectVideo>
+                        <li>
+                            <Link className='title' to={"projects/" + item.name}>{item.name}</Link>
+                            <span>{item.description}</span>
+                        </li>
+                    </Project>
+                ))}
             </ProjectList>
 
 

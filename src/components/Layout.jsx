@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import Footer from '../layout/Footer';
 import Navbar from '../layout/Navbar';
 import Homepage from './Homepage';
 import Contact from './HomeSections/Contact';
 import Publications from './HomeSections/Publications';
 
 const Container = styled.div`
-    background: #1a1a1a;
     height: 100%;
     min-height: 100vh;
     overflow: auto;
@@ -48,6 +48,7 @@ function Layout() {
             <DarkBackground>
                 <Content>
                     <Contact />
+                    <Footer />
                 </Content>
             </DarkBackground>
         </Container>

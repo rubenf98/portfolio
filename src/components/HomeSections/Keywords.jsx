@@ -15,8 +15,8 @@ const flash = keyframes`
 const Container = styled.div`
     font-size: 26px;
     margin: 100px;
-    padding: 20px 0;
-    margin: 150px auto;
+    padding: 150px 0 20px 0;
+    margin: auto;
     letter-spacing: .3vw;
     display: flex;
     justify-content: space-around;
@@ -27,9 +27,7 @@ const Container = styled.div`
         animation: ${flash} 3s linear infinite;
 
         &:nth-child(3),
-        &:nth-child(4),
-        &:nth-child(5),
-        &:nth-child(6){
+        &:nth-child(4){
             animation-delay: .1s;
         }
     }
@@ -39,17 +37,16 @@ const Container = styled.div`
 
 
 function Keywords() {
-    return (
-        <Container>
-            <span> engineer </span>
-            <span> / </span>
-            <span> developer </span>
-            <span> / </span>
-            <span> researcher </span>
-            <span> / </span>
-            <span> informatics </span>
-        </Container>
-    );
+  return (
+    <Container>
+      <span> &lt; </span>
+      <span> engineer </span>
+      <span> developer </span>
+      <span> researcher </span>
+      <span> informatics </span>
+      <span> 	/&gt; </span>
+    </Container>
+  );
 }
 
 export default Keywords;

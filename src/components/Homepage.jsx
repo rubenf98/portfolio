@@ -83,6 +83,7 @@ const ImageContainer = styled.div`
 
     img {
         width: 100%;
+        filter: grayscale(1);
     }
 `;
 

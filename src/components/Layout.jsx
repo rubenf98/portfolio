@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Navbar from '../layout/Navbar';
 import Homepage from './Homepage';
+import Contact from './HomeSections/Contact';
 
 const Container = styled.div`
     background: #1a1a1a;
@@ -27,6 +28,7 @@ function Layout() {
             <Content>
                 <Navbar />
                 <Homepage />
+                <Contact />
             </Content>
         </Container>
     );

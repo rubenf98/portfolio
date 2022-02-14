@@ -1,13 +1,29 @@
 import React from 'react'
 import styled from 'styled-components';
+import { dimensions } from '../../helper';
 
 const Container = styled.div`
-    padding: 50px;
+    padding: 50px 0px;
     width: 70%;
     margin: auto;
     display: flex;
     box-sizing: border-box;
     align-items: start;
+    flex-wrap: wrap;
+
+    @media (max-width: ${dimensions.xl}) {
+        width: 80%;
+    }
+
+
+    @media (max-width: ${dimensions.lg}) {
+        width: 90%;
+        padding: 20px 0px;
+    }
+
+    @media (max-width: ${dimensions.md}) {
+        width: 100%;
+    }
 `;
 
 const Title = styled.div`
@@ -15,6 +31,12 @@ const Title = styled.div`
     position: sticky;
     top: 25%;
     padding: 20px;
+    box-sizing: border-box;
+
+    @media (max-width: ${dimensions.md}) {
+        width: 100%;
+        position: relative;
+    }
 
     h2 {
         margin-top: 10px;
@@ -34,6 +56,10 @@ const Papers = styled.div`
     width: 50%;
     padding: 20px;
     color: #292929;
+    box-sizing: border-box;
+    @media (max-width: ${dimensions.md}) {
+        width: 100%;
+    }
 
     div {
         margin: 50px 0px;

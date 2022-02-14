@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import { dimensions } from '../../helper';
+import { dimensions, colors } from '../../helper';
 
 const Container = styled.div`
     width: 100%;
@@ -10,15 +10,7 @@ const Container = styled.div`
     padding: 50px;
     color: white;
 
-    h5 {
-        margin-top: 10px;
-        margin-bottom: 10px;
-        font-size: 26px;
-        line-height: 1.2;
-        font-weight: 500;
-    }
-
-    h1 {
+    h2 {
         margin-top: 20px;
         margin-bottom: 10px;
         font-size: 120px;
@@ -40,9 +32,10 @@ const EmailContainer = styled.div`
     position: relative;
 `;
 
-const Email = styled.div`
+const Email = styled.a`
     display: flex;
     margin-top: 100px;
+    text-decoration: none;
 
     img {
         width: 200px;
@@ -67,11 +60,35 @@ const Email = styled.div`
     }
 
     h3 {
+
+        &:hover {
+            ::before {
+                width: 105%;
+            }
+        }
+
+        ::before {
+            position: absolute;
+            margin-left: -5px;
+            content: "";
+            width: 0px;
+            height: 6px;
+            left: 0;
+            bottom: 0;
+            top: 0;
+            margin-top: auto;
+            margin-bottom: auto; 
+            background: ${colors.accent};
+            transition: 0.2s;    
+        }
+        
+        transition: 0.3s;
+        position: relative;
         margin-top: 20px;
         margin-bottom: 10px;
         font-size: 80px;
         line-height: 1.2;
-        color: #e4c180;
+        color: ${colors.accent};
 
         @media (max-width: ${dimensions.lg}){
             font-size: 50px;
@@ -90,11 +107,10 @@ const Email = styled.div`
 function Contact() {
     return (
         <Container>
-            <h5>Ruben Freitas</h5>
-            <h1>Let's Work</h1>
-            <h1>Together.</h1>
+            <h2>Let's Work</h2>
+            <h2>Together.</h2>
             <EmailContainer>
-                <Email>
+                <Email href="mailto:work@rubenfreitas.com">
                     <img src="/icons/right-arrow.svg" alt="arrow-indicator" />
                     <h3>work@rubenfreitas.com</h3>
                 </Email>

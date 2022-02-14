@@ -2,6 +2,11 @@ import React from 'react'
 import styled from 'styled-components';
 import { dimensions } from '../../helper';
 
+const Background = styled.div`
+    width: 100%;
+    background: #f0f0f0;
+`;
+
 const Container = styled.div`
     padding: 50px 0px;
     width: 70%;
@@ -10,6 +15,7 @@ const Container = styled.div`
     box-sizing: border-box;
     align-items: start;
     flex-wrap: wrap;
+    max-width: 3000px;
 
     @media (max-width: ${dimensions.xl}) {
         width: 80%;
@@ -109,22 +115,24 @@ const items = [
 
 function Publications() {
     return (
-        <Container>
-            <Title>
-                <h2>Scientific Publications.</h2>
-                <p>Over the years, I have been in practical research activities, resulting in several scientific publications involving interactive web-based systems, human-centered ML and interactive ENM.</p>
-            </Title>
-            <Papers>
-                {items.map((item, index) => (
-                    <div
-                        key={index}
-                    >
-                        <h4>{item.title}, {item.year}</h4>
-                        <p>{item.description}</p>
-                    </div>
-                ))}
-            </Papers>
-        </Container>
+        <Background>
+            <Container>
+                <Title>
+                    <h2>Scientific Publications.</h2>
+                    <p>Over the years, I have been in practical research activities, resulting in several scientific publications involving interactive web-based systems, human-centered ML and interactive ENM.</p>
+                </Title>
+                <Papers>
+                    {items.map((item, index) => (
+                        <div
+                            key={index}
+                        >
+                            <h4>{item.title}, {item.year}</h4>
+                            <p>{item.description}</p>
+                        </div>
+                    ))}
+                </Papers>
+            </Container>
+        </Background>
     )
 }
 

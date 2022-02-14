@@ -1,7 +1,10 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import About from './HomeSections/About';
 import Keywords from './HomeSections/Keywords';
 import Projects from './HomeSections/Projects';
+import Publications from './HomeSections/Publications';
+import Contact from './HomeSections/Contact';
 
 const scroll = keyframes`
   0% {
@@ -15,20 +18,19 @@ const scroll = keyframes`
 const Container = styled.div`
     width: 100%;
     min-height: 100vh;
+    
 `;
 
 const Row = styled.div`
     position: sticky;
     top: 0;
     min-height: 70vh;
-
     object-fit: fill;
 `;
 
 
 const TextContainer = styled.div`
     z-index: 2;
-    
     position: relative;
     overflow: hidden;
 `;
@@ -83,6 +85,8 @@ const ImageContainer = styled.div`
 
     img {
         width: 100%;
+        max-width: 3000px;
+        margin: auto;
         filter: grayscale(1);
     }
 `;
@@ -109,11 +113,13 @@ function Homepage() {
                 <ImageContainer>
                     <img src="/images/prof.jpg" loading="eager" />
                 </ImageContainer>
-
-
             </Container>
+
             <Keywords />
             <Projects />
+            <About />
+            <Publications />
+            <Contact />
         </div>
     );
 }

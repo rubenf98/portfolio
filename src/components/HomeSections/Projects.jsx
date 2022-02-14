@@ -9,6 +9,7 @@ const Container = styled.div`
     align-items: start;
     padding: 150px 50px;
     box-sizing: border-box;
+    max-width: 3000px;
 `;
 
 

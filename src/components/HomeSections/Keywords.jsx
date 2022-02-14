@@ -13,6 +13,7 @@ const flash = keyframes`
 
 
 const Container = styled.div`
+ max-width: 3000px;
     font-size: 26px;
     margin: 100px;
     padding: 150px 0 20px 0;

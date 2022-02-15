@@ -116,8 +116,9 @@ function Homepage() {
             </Container>
 
             <Keywords />
-            <Projects />
             <About />
+            <Projects />
+            
             <Publications />
             <Contact />
         </div>

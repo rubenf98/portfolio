@@ -52,7 +52,7 @@ function About() {
                     In the future, I'd love to incorporate AI into my web projects in order to create something unique and innovative, therefore establishing my brand. I'd also like to explore WebGL towards creating fully immersive web-based AI applications.
                 </p>
             </InfoContainer>
-            <img src="/images/about.jpg.svg" alt="" />
+            <img src="/images/about.svg" alt="About" loading='lazy' />
         </Container>
     )
 }

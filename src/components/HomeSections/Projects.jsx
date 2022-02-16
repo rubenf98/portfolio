@@ -33,11 +33,12 @@ const Container = styled.div`
 const ProjectList = styled.ul`
     list-style-type: none;
     z-index: 2;
+    
     li {
+
         position: inherit;
         font-weight: 600;
         padding: 40px 20px;
-        font-family: 'Contrail One', cursive;
         font-family: 'Unna', serif;
         cursor: pointer;
         white-space: nowrap;
@@ -235,7 +236,7 @@ function Projects() {
                     </Project>
                 ))}
             </ProjectList>
-            {video != undefined &&
+            {video !== undefined &&
                 <ProjectVideo background={items[video].background} className="video-container" >
 
                     <video autoPlay loop>

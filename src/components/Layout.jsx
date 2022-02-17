@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Footer from '../layout/Footer';
 import Navbar from '../layout/Navbar';
-import Homepage from './Homepage';
 
 const Container = styled.div`
     height: 100%;
@@ -20,12 +19,12 @@ const Content = styled.div`
 
 
 
-function Layout() {
+function Layout({ children }) {
     return (
         <Container>
             <Content>
                 <Navbar />
-                <Homepage />
+                {children}
                 <Footer />
             </Content>
         </Container>

@@ -41,7 +41,7 @@ const Email = styled.a`
         width: 200px;
         z-index: 1;
         margin-right: 40px;
-        box-sizing: border-box
+        box-sizing: border-box;
 
         @media (max-width: ${dimensions.lg}){
             width: 100px;

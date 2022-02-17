@@ -230,7 +230,7 @@ function Projects() {
                         onMouseLeave={() => setVideo(undefined)}
                     >
                         <li>
-                            <Link className='title' to={"projects/" + item.name}>{item.name}</Link>
+                            <Link className='title' to={"/" + item.name.replace(/\s/g, "").toLowerCase()}>{item.name}</Link>
                             <span>{item.description}</span>
                         </li>
                     </Project>

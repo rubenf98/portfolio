@@ -9,7 +9,7 @@ const Container = styled.div`
     box-sizing: border-box;
     display: flex;
     justify-content: end;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 `;
 
 

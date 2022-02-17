@@ -60,8 +60,8 @@ const Section = styled.section`
 const GalleryContainer = styled.section`
     display: flex;
     flex-wrap: wrap;
-    width: 80%;
-    margin: auto;
+    width: 100%;
+    margin: 100px auto;
 
     img {
       width: 50%;

@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom'
 
 const Container = styled.div`
     width: 100%;
@@ -10,6 +12,7 @@ const Container = styled.div`
     display: flex;
     justify-content: end;
     margin-bottom: 50px;
+    position: relative;
 `;
 
 
@@ -21,9 +24,31 @@ const ColorProfile = styled.div`
     cursor: pointer;
 `;
 
+const BackButton = styled(Link)`
+    display: ${props => props.display ? "block" : "none"};
+    position: fixed;
+    left: 50px;
+    top: 0;
+    margin: 50px 0px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+
+    img {
+        width: 100%;
+    }
+`;
+
+
 function Navbar() {
+    const location = useLocation();
+
     return (
         <Container>
+            <BackButton to="/" display={location.pathname.length == 1 ? 0 : 1}>
+                <img src='/icons/left-arrow.svg' />
+            </BackButton>
+
             <ColorProfile />
         </Container>
     );

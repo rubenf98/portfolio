@@ -11,7 +11,7 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: middle;
-    position: fixed;
+    position: relative;
     bottom: 0;
 `;
 const Copyright = styled.p`

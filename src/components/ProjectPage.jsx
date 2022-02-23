@@ -104,10 +104,10 @@ function ProjectPage({ title, subtitle, imageSrc, motivation, solution }) {
         {motivation}
       </Section>
       <GalleryContainer>
-        <img loading='lazy' alt="project" src={imageSrc + "1.png"} />
-        <img loading='lazy' alt="project" src={imageSrc + "2.png"} />
         <img loading='lazy' alt="project" src={imageSrc + "3.png"} />
-        <img loading='lazy' alt="project" src={imageSrc + "4.png"} />
+        <img loading='lazy' alt="project" src={imageSrc + "3.png"} />
+        <img loading='lazy' alt="project" src={imageSrc + "3.png"} />
+        <img loading='lazy' alt="project" src={imageSrc + "3.png"} />
       </GalleryContainer>
 
       <Section>

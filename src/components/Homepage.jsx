@@ -1,96 +1,164 @@
 import React from 'react';
 import styled from 'styled-components';
-import About from './HomeSections/About';
-import Keywords from './HomeSections/Keywords';
-import Projects from './HomeSections/Projects';
-import Publications from './HomeSections/Publications';
-import Contact from './HomeSections/Contact';
+import { dimensions } from '../helper';
 
 const Container = styled.div`
     width: 100%;
     min-height: 100vh;
-    
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
-
-const Row = styled.div`
-    position: sticky;
-    top: 0px;
-    padding: 20px 0;
-    min-height: 70vh;
-    object-fit: fill;
-    text-align: center;
-    font-weight: normal;
-    box-sizing: border-box;
-    
-
-    h1 {
-        color: #c8c8c8;
-        margin: 0;
-        font-size: 1vw;
-        letter-spacing: 0em;
-        font-family: 'Megrim', cursive;
-    }
-
-    h2 {
-        margin: 3vh auto;
-	    font-size: 5vw;
-        color: #ececec;
-        max-width: 65vw;
-        font-family: 'Noto Serif Display', serif;
-    }
-`;
-
 
 const ImageContainer = styled.div`
-	position: relative;
     display: flex;
-    overflow: hidden;
-    width: 65vw;
-    max-width: 100%;
-    padding-top: 0;
-    margin-bottom: 200px;
-    z-index: 1;
-    margin: auto;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
 
-    picture {
-        width: 100%;
-        max-width: 3000px;
-        margin: auto;
-        
+    @media (max-width: ${dimensions.md}) {
+        justify-content: flex-start;
+    }
 
-        img {
+    h1 {
+        color: #ffffff;
+        line-height: 0.86;
+        font-size: 124px;
+        letter-spacing: -9.92px;
+        padding-left: 10px;
+
+        @media (max-width: ${dimensions.md}) {
+            position: absolute;
+            bottom: -100px;
+            left: 0;
+            font-size: 60px;
+            left: 50%;
+            transform: translate(-50%, 0);
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 0.85;
+            letter-spacing: -4.8px;
+            z-index: 5;
+        }
+    }
+
+    
+`;
+
+
+const Logo = styled.img`
+    width: 200px;
+    top: 60px;
+    position: absolute;
+    
+`;
+
+
+const ImageHeaderContainer = styled.div`
+    z-index: 3;
+    position: relative;
+    padding-top: 30px;
+    display: flex;
+
+    @media (max-width: ${dimensions.sm}) {
+        width: 80%;
+    }
+
+    .background {
+        z-index: -1;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 70%;
+        height: 100%;
+        background-color: #e4c180;
+    }
+
+    img {
+        width: 600px;
+
+        @media (max-width: ${dimensions.lg}) {
+            width: 500px;
+        }
+
+        @media (max-width: ${dimensions.sm}) {
             width: 100%;
-            filter: grayscale(1);
+        }
+    }
+    
+`;
+
+const SocialContainer = styled.div`
+    transform: rotate(270deg);
+    display: block;
+    white-space: nowrap; 
+    position: absolute;
+    left: -80px;
+    font-size: 22px;
+    font-weight: 500;
+    z-index: 999;
+    
+
+    @media (max-width: ${dimensions.md}) {
+        display: none;
+    }
+
+    a {
+        opacity: 0.4;
+        margin: 0px 40px;
+        text-decoration: none;
+        color: ${props => props.color};
+        transition: opacity .3s linear;
+        font-size: 20px;
+        text-transform: uppercase;
+        font-weight: 300;
+
+        font-stretch: normal;
+
+        font-style: normal;
+
+        line-height: 2.75;
+
+        letter-spacing: -0.92px;
+
+        &:hover {
+            opacity:1;
         }
     }
 `;
-
 
 function Homepage() {
 
     return (
         <div>
             <Container>
-                <Row>
-                    <h1>Rúben Freitas</h1>
-                    <h2>The Researcher that does Web Development</h2>
-
-                </Row>
+                <SocialContainer color="white">
+                    <a rel="noreferrer noopener" target="_blank" href="https://github.com/rubenf98">github</a>
+                    <a rel="noreferrer noopener" target="_blank" href="https://scholar.google.com/citations?user=1xnrzDMAAAAJ">scholar</a>
+                    <a rel="noreferrer noopener" target="_blank" href="https://www.instagram.com/jrubenf98/">instagram</a>
+                </SocialContainer>
+                <Logo src="/image/logo.svg" alt="logo" />
                 <ImageContainer>
-                    <picture>
-                        <source srcSet="/images/profile.jpg" type="image/jpg" />
-                        <img src="/images/profile.webp" alt="Profile" loading="eager" />
-                    </picture>
+                    <ImageHeaderContainer>
+                        <img src="/image/header.png" alt="" />
+                        <div className='background' />
+
+                    </ImageHeaderContainer>
+
+                    <h1>soon, <br /> rúben <br /> freitas</h1>
 
                 </ImageContainer>
             </Container>
-
+            {/* 
             <Keywords />
             <About />
             <Projects />
 
             <Publications />
-            <Contact />
+            <Contact /> */}
         </div>
     );
 }

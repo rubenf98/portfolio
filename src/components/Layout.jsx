@@ -1,13 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import Footer from '../layout/Footer';
-import Navbar from '../layout/Navbar';
 
 const Container = styled.div`
-    height: 100%;
-    min-height: 100vh;
+    width: 100%;
+    height: 100vh;
     overflow: auto;
-    background: #1a1a1a;
+    background: #16181C;
 `;
 
 
@@ -23,9 +21,9 @@ function Layout({ children }) {
     return (
         <Container>
             <Content>
-                <Navbar />
+                {/* <Navbar /> */}
                 {children}
-                <Footer />
+                {/* <Footer /> */}
             </Content>
         </Container>
     );

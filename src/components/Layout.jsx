@@ -1,32 +1,55 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import Navbar from '../layout/Navbar';
+import { light, dark } from "../themes"
+import { connect } from "react-redux";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles } from "../globalStyles";
 
 const Container = styled.div`
     width: 100%;
     height: 100vh;
-    overflow: auto;
-    background: #16181C;
+    position: relative;
 `;
 
 
 const Content = styled.div`
     width: 100%;
     margin: auto;
-    position: relative;
+    
 `;
 
 
 
-function Layout({ children }) {
+function Layout({ children, theme }) {
+
+    useEffect(() => {
+        setTimeout(() => {
+            document.body.style.transition = "all 0.50s linear";
+        }, 1000);
+    }, [])
+
     return (
         <Container>
-            <Content>
-                {/* <Navbar /> */}
-                {children}
-                {/* <Footer /> */}
-            </Content>
+            <ThemeProvider theme={theme === 'light' ? light : dark}>
+                <GlobalStyles />
+                <Content>
+                    <Navbar />
+                    {children}
+                    {/* <Footer /> */}
+                </Content>
+            </ThemeProvider>
         </Container>
     );
 }
 
-export default Layout;
+const mapStateToProps = (state) => {
+    return {
+        theme: state.application.theme,
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    null
+)(Layout);

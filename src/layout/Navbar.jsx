@@ -1,57 +1,36 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { useLocation } from 'react-router-dom'
+import { connect } from "react-redux";
 
 const Container = styled.div`
     width: 100%;
-    position: static;
-    top: 0;
-    padding: 50px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: end;
-    margin-bottom: 50px;
-    position: relative;
-`;
-
-
-const ColorProfile = styled.div`
-    width: 20px;
-    height: 20px;
-    border-radius: 20px;
-    background: #f5f5f5;
-    cursor: pointer;
-`;
-
-const BackButton = styled(Link)`
-    display: ${props => props.display ? "block" : "none"};
     position: fixed;
-    left: 50px;
     top: 0;
-    margin: 50px 0px;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
+    display: flex;
+    justify-content: center;
+`;
 
-    img {
-        width: 100%;
-    }
+const Logo = styled.img`
+    width: 200px;
+    margin-top: 60px;
 `;
 
 
-function Navbar() {
-    const location = useLocation();
+function Navbar({ reduxTheme }) {
 
     return (
         <Container>
-            <BackButton to="/" display={location.pathname.length == 1 ? 0 : 1}>
-                <img src='/icons/left-arrow.svg' />
-            </BackButton>
-
-            <ColorProfile />
+            <Logo src={reduxTheme === "light" ? "/image/logo_light.svg" : "/image/logo_dark.svg"} alt="logo" />
         </Container>
     );
 }
 
-export default Navbar;
+const mapStateToProps = (state) => {
+    return {
+        reduxTheme: state.application.theme,
+    };
+};
+export default connect(
+    mapStateToProps,
+    null
+)(Navbar);

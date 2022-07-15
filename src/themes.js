@@ -1,14 +1,14 @@
 export const light = {
     text: '#16181C',
     primary: '#E4C180',
-    darkerPrimary: '#c49a4e',
+    accent: '#c49a4e',
     background: '#ffffff',
 }
 
 export const dark = {
     text: '#ffffff',
-    primary: '#E4C180',
-    darkerPrimary: '#c49a4e',
+    primary: '#c49a4e',
+    accent: '#E4C180',
     background: '#16181C',
 }
 

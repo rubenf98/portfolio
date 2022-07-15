@@ -172,9 +172,9 @@ const SocialContainer = styled.div`
 
 const ThemeSwitch = styled.img`
     position: absolute;
-    right: 60px;
+    right: 50px;
     bottom: 60px;
-    width: 50px; height: 50px;
+    width: 35px; height: 35px;
     cursor: pointer;
 
     @media (max-width: ${dimensions.md}) {
@@ -247,7 +247,7 @@ function Header({ theme, reduxTheme, setDarkTheme, setLightTheme }) {
             </SocialContainer>
 
             <ImageContainer>
-                <ImageHeaderContainer grayscale={reduxTheme === "light" ? 1 : 0} background={theme.primary}>
+                <ImageHeaderContainer grayscale={reduxTheme === "light" ? 1 : 0} background={theme.accent}>
                     <img src="/image/header.png" alt="picture of me pointing towards social links" />
                     <div className='background' />
                 </ImageHeaderContainer>

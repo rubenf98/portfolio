@@ -1,68 +1,103 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, withTheme } from 'styled-components';
+import AnimationContainer from '../AnimationContainer';
 
-const squares = keyframes`
+const zoom = keyframes`
   0% {
-    bottom: -1%;
-  }
-
-  5% {
-    opacity:1;
+    scale: 1;
   }
 
   100% {
-    transform: rotate(360deg);
-    bottom: 100%;
-    opacity: 0;
+    scale: 1.1;
+  }
+`;
+
+const transition = keyframes`
+  0% {
+    width: 100%;
+    height: 60vh;
+  }
+
+  45% {
+    width: 0%;
+    height: 60vh;
+  }
+  60% {
+    width: 0%;
+    height: 60vh;
+  }
+
+  100% {
+    width: 100%;
+    height: 60vh;
   }
 `;
 
 const Container = styled.div`
     width: 100%;
+    min-height: 100vh;
+    max-width: 3000px;
+    margin: auto;
+    display: block;
+
+    
+`;
+
+const Title = styled.h3`
+    line-height: 4.57;
+    font-size: 23px;
+    letter-spacing: 4.6px;
+    color: ${props => props.color};
+    margin: 0;
+    text-align: right;
+    display: block;
+    width: 100%;
+    position: absolute;
+    top: -100px;
+    right: 40px;
+`;
+
+const More = styled.h3`
+    line-height: 4.57;
+    font-size: 23px;
+    letter-spacing: 4.6px;
+    color: ${props => props.color};
+    margin: 0;
+    text-align: right;
+    display: block;
+    width: 100%;
+    position: absolute;
+    bottom: -90px;
+    right:0 ;
+`;
+
+
+const Content = styled.div`
+    width: 80%;
     margin: auto;
     display: flex;
-    align-items: start;
-    padding: 150px 50px;
+    justify-content: space-between;
+    align-items: center;
     box-sizing: border-box;
-    max-width: 3000px;
     position: relative;
 `;
 
 
 const ProjectList = styled.ul`
     list-style-type: none;
-    z-index: 2;
+    padding: 0px 40px 0px 0px;
+    box-sizing: border-box;
+    width: 30%;
+    position: relative;
     
     li {
-
         position: inherit;
         font-weight: 600;
-        padding: 40px 20px;
-        font-family: 'Unna', serif;
+        padding: 10px 0px;
         cursor: pointer;
         white-space: nowrap;
         text-align: right;
-
-        .title {
-            display: block;
-            text-decoration: none;
-            font-size: 90px;
-            margin-bottom: 0px;
-            color: #c3c3c3;
-            transition: color .3s cubic-bezier(.645,.045,.355,1);
-
-                &:hover {
-                    color: #ffffff; 
-                }
-        }
-
-        span {
-            color: #616161;
-            margin-bottom: 140px;
-            font-size: 22px;
-            font-family: 'Zen Kurenaido', sans-serif;  
-        }   
     }
 `;
 
@@ -70,186 +105,116 @@ const ProjectList = styled.ul`
 const Project = styled.div`
     width: 100%;
 
-    &:hover {
-        .video-container {
-            z-index: 2;
-        }
+    .title {
+        display: block;
+        color: inherit;
+        text-decoration: none;
+        line-height: 70px;
+        font-size: ${props => props.active ? "65px" : "60px"};
+        box-sizing: border-box;
+        margin-bottom: 0px;
+        opacity: ${props => props.active ? 1 : .7};
+        transition: all .3s ease;
     }
+
+    span {
+        color: inherit;
+        margin-bottom: 140px;
+        opacity: ${props => props.active ? 1 : .3};
+        font-size: ${props => props.active ? "22px" : "18px"};
+        transition: all .3s ease;
+    }   
 `;
 
 
 const ProjectVideo = styled.div`
-    z-index: 2 ;
-    padding: 3%;
-    margin: 0px 100px;
     box-sizing: border-box;
     pointer-events: none;
-    opacity: 1;
-    will-change: transform;
-    background: ${props => props.background};
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: sticky;
-    top: 50px;
     border-radius: 0px;
-    flex:1;
-    width: 50%;
+    width: 65%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
 
-    video {
-        margin: auto;
+    .wrapper {
+        overflow: hidden;
+        border-radius: inherit;
+        height: 60vh;
+        animation: ${transition} 1s cubic-bezier(.21,1.03,.7,1) forwards;
+        position: relative;
+        box-shadow: 0 0 20px 0px rgba(0,0,0,.2);
+    }
+
+    img {
         border-radius: inherit;
         width: 100%;
-        height: auto;
+        height: 100%;
+        object-fit: cover;
+       
         display: block;
         margin: auto;
-        box-shadow: 0 0 20px 0px rgba(0,0,0,.3);2
-    }
-`;
-
-const Background = styled.div`
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    height: 100%;
-    position: absolute;
-    display: flex;
-    justify-content: space-around;
-
-
-    .square {
-        position: absolute;
-        animation: ${squares} 9.5s linear infinite;
-        align-self: flex-end;
-        background: #5a5a5a65;  
-        opacity:0;
-        
-
-        &:nth-child(2) { 
-            height: 1.5em;  
-            width: 3em;   
-            animation-delay: 1s;
-            animation-duration: 17s; 
-            filter: blur(5px);
-            left: 10%;
-        }
-        &:nth-child(3) { 
-            height: 2em;    
-            width: 1em;   
-            animation-delay: 1.5s;
-            animation-duration: 8s; 
-            filter: blur(1px) ;
-            left: 20%;
-        }
-        &:nth-child(4) { 
-            height: 1em;    
-            width: 1.5em; 
-            animation-delay: 0.5s;
-            filter: blur(3px);
-            animation-duration: 13s ;
-            left: 30%;
-        }
-        &:nth-child(5) { 
-            height: 1.25em; 
-            width: 2em;   
-            animation-delay: 4s;
-            filter: blur(2px);
-            animation-duration: 11s ;
-            left: 40%;
-        }
-        &:nth-child(6) { 
-            height: 2.5em;  
-            width: 2em;   
-            animation-delay: 2s;
-            filter: blur(1px);
-            animation-duration: 9s ;
-            left: 50%;
-        }
-        &:nth-child(7) { 
-            height: 5em;    
-            width: 2em;   
-            filter: blur(2.5px);
-            animation-duration: 12s ;
-            left: 60%;
-        }
-        &:nth-child(8) { 
-            height: 1em;    
-            width: 3em;   
-            animation-delay: 5s;
-            filter: blur(6px);
-            animation-duration: 18s ;
-            left: 70%;
-        }
-        &:nth-child(9) {
-            height: 1.5em; 
-            width: 2em; 
-            filter: blur(0.5px);
-            animation-duration: 9s ;
-            left: 80%;
-        }
-        &:nth-child(9) {
-            height: 3em;
-            width: 2.4em;
-            animation-delay: 6s;
-            filter: blur(0.5px);
-            animation-duration: 12s ;
-            left: 90%;
-        }
+        animation: ${zoom} 3s ease-out forwards;
+        animation-delay: 1s;
     }
 `;
 
 const items = [
-    { name: "Wave Labs", description: "Interaquatic Dashboard", video: "wave", background: "#6379b4" },
-    { name: "Marco Abreu", description: "Upholsterer & Decorator", video: "2", background: "#940000" },
-    { name: "Plaza II", description: "Condominium Management", video: "3", background: "#ff9100" },
-    { name: "Fast Rope Madeira", description: "Adventure Company For Outdoor Activities", video: "4", background: "#062781" },
-    { name: "Educadora Sénior", description: "Senior Educator", video: "5", background: "#cfcc20" },
+    { id: 1, name: "Dom Design", description: "Design Agency", video: "dom" },
+    { id: 2, name: "Marco Abreu", description: "Upholsterer & Decorator", video: "marcoabreu" },
+    { id: 3, name: "Plaza II", description: "Condominium Management", video: "plaza" },
+    { id: 4, name: "Be Local", description: "Adventure Outdoor Activities", video: "belocal" },
 ];
 
-function Projects() {
-    const [video, setVideo] = useState(undefined)
+function Projects({ theme }) {
+    const [active, setActive] = useState(items[0])
+    const [source, setSource] = useState("dom")
+
+    function handleMouseOver(item) {
+        setActive(item)
+
+        setTimeout(() => {
+            setSource(item.video)
+        }, 400);
+
+    }
+
+
     return (
         <Container >
-            <Background>
-                <div className="square"></div>
-                <div className="square"></div>
-                <div className="square"></div>
-                <div className="square"></div>
-                <div className="square"></div>
-                <div className="square"></div>
-                <div className="square"></div>
-                <div className="square"></div>
-                <div className="square"></div>
-            </Background>
-            <ProjectList >
-                {items.map((item, index) => (
-                    <Project
-                        key={index}
-                        onMouseOver={() => setVideo(index)}
-                        onMouseLeave={() => setVideo(undefined)}
-                    >
-                        <li>
-                            <Link className='title' to={"/" + item.name.replace(/\s/g, "").toLowerCase()}>{item.name}</Link>
-                            <span>{item.description}</span>
-                        </li>
-                    </Project>
-                ))}
-            </ProjectList>
-            {video !== undefined &&
-                <ProjectVideo background={items[video].background} className="video-container" >
+            <Content >
+                <ProjectList >
+                    <Title color={theme.primary}>my projects</Title>
+                    {items.map((item, index) => (
+                        <Project
+                            active={item.id == active.id}
+                            key={index}
+                            onMouseOver={() => handleMouseOver(item)}
+                        >
+                            <li>
+                                <Link
 
-                    <video autoPlay loop>
-                        <source src={"/videos/" + items[video].video + ".mp4"} type="video/mp4" />
-                        <source src={"/videos/" + items[video].video + ".webm"} type="video/webm" />
-                        Your browser does not support the video tag.
-                    </video>
+                                    className='title' to={"/" + item.name.replace(/\s/g, "").toLowerCase()}
+                                >
+                                    {item.name}
+                                </Link>
+                                <span>{item.description}</span>
+                            </li>
+                        </Project>
+                    ))}
+                </ProjectList>
 
-
+                <ProjectVideo key={active.id}>
+                    <div className="wrapper">
+                        <img src={"/image/projects/thumbnail/" + source + ".jpg"} />
+                    </div>
+                    <More color={theme.primary}>all projects</More>
                 </ProjectVideo>
-            }
+
+            </Content>
         </Container>
     );
 }
 
-export default Projects;
+export default withTheme(Projects);

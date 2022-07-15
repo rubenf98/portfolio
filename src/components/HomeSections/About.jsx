@@ -52,7 +52,7 @@ const Highlight = styled.div`
 function About({ theme }) {
     return (
         <Container>
-            <Highlight width="3%" background={theme.darkerPrimary} />
+            <Highlight width="3%" background={theme.accent} />
             <InfoContainer primary={theme.primary}>
                 <h3>
                     about me
@@ -71,7 +71,7 @@ function About({ theme }) {
                     In the future, I'd love to incorporate AI into my web projects in order to create something unique and innovative, therefore establishing my brand. I'd also like to explore WebGL towards creating fully immersive web-based AI applications.
                 </p> */}
             </InfoContainer>
-            <Highlight width="10%" background={theme.darkerPrimary} />
+            <Highlight width="10%" background={theme.accent} />
         </Container>
     )
 }

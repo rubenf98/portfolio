@@ -4,7 +4,7 @@ import { dimensions } from '../helper';
 import Header from './HomeSections/Header';
 import About from './HomeSections/About';
 import Sentence from './HomeSections/Sentence';
-
+import Projects from './HomeSections/Projects';
 
 
 function Homepage() {
@@ -14,10 +14,11 @@ function Homepage() {
             <Header />
             <Sentence />
             <About />
+            <Projects />
             {/* 
             <Keywords />
             <About />
-            <Projects />
+            
 
             <Publications />
             <Contact /> */}

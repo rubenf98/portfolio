@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { keyframes, withTheme } from 'styled-components';
+import { maxWidth } from '../../helper';
 import AnimationContainer from '../AnimationContainer';
 
 const zoom = keyframes`
@@ -36,11 +37,11 @@ const transition = keyframes`
 
 const Container = styled.div`
     width: 100%;
-    min-height: 100vh;
-    max-width: 3000px;
-    margin: auto;
+    max-width: ${maxWidth};
+    margin: 200px auto;
     display: block;
-
+padding: 0px 20px;
+box-sizing: border-box;
     
 `;
 
@@ -164,7 +165,7 @@ const items = [
     { id: 1, name: "Dom Design", description: "Design Agency", video: "dom" },
     { id: 2, name: "Marco Abreu", description: "Upholsterer & Decorator", video: "marcoabreu" },
     { id: 3, name: "Plaza II", description: "Condominium Management", video: "plaza" },
-    { id: 4, name: "Be Local", description: "Adventure Outdoor Activities", video: "belocal" },
+    { id: 4, name: "CR Rent", description: "Rent-a-car", video: "crrent" },
 ];
 
 function Projects({ theme }) {
@@ -185,7 +186,7 @@ function Projects({ theme }) {
         <Container >
             <Content >
                 <ProjectList >
-                    <Title color={theme.primary}>my projects</Title>
+                    <Title color={theme.primary}>My projects</Title>
                     {items.map((item, index) => (
                         <Project
                             active={item.id == active.id}
@@ -209,7 +210,7 @@ function Projects({ theme }) {
                     <div className="wrapper">
                         <img src={"/image/projects/thumbnail/" + source + ".jpg"} />
                     </div>
-                    <More color={theme.primary}>all projects</More>
+                    <More color={theme.primary}>See all</More>
                 </ProjectVideo>
 
             </Content>

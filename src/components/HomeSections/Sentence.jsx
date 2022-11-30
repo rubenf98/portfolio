@@ -67,6 +67,7 @@ const MovingWord = styled.div`
     width: 60%;
     margin: 150px 0px;
     margin-left: ${props => props.left ? "auto" : "0px"};
+    font-family: 'Poppins', sans-serif;
 
     @media (max-width: ${dimensions.md}) {
         font-size: 40px;

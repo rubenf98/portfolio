@@ -188,7 +188,7 @@ const ScrollIndicator = styled.div`
     bottom: -90px;
     transform: translate(-50%, 0);
     width: 1px; height: 180px;
-    background: #ffffff44;
+    background: ${props => props.background};
 
     .active {
         position: absolute;
@@ -196,7 +196,7 @@ const ScrollIndicator = styled.div`
         bottom: 120px;
         transform: translate(-50%, 0);
         width: 2px; height: 60px;
-        background: #ffffffa7;
+        background: ${props => props.accent};
         animation: ${scroll} 4s ease-in-out infinite;
     }
 
@@ -256,8 +256,16 @@ function Header({ theme, reduxTheme, setDarkTheme, setLightTheme }) {
 
             </ImageContainer>
 
-            <ThemeSwitch src={reduxTheme === 'light' ? "/icon/light_theme_switch.svg" : "/icon/dark_theme_switch.svg"} onClick={reduxTheme === 'light' ? setDarkTheme : setLightTheme} />
-            <ScrollIndicator><div className='active' /> </ScrollIndicator>
+            <ThemeSwitch
+                src={reduxTheme === 'light' ? "/icon/light_theme_switch.svg" : "/icon/dark_theme_switch.svg"}
+                onClick={reduxTheme === 'light' ? setDarkTheme : setLightTheme}
+            />
+            <ScrollIndicator
+                background={theme.scrollIndicator}
+                accent={theme.scrollIndicatorAccent}
+            >
+                <div className='active' />
+            </ScrollIndicator>
         </Container>
     )
 }

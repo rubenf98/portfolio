@@ -3,6 +3,8 @@ export const light = {
     primary: '#E4C180',
     accent: '#c49a4e',
     background: '#ffffff',
+    scrollIndicator: '#16181C44',
+    scrollIndicatorAccent: '#16181Ca7',
 }
 
 export const dark = {
@@ -10,6 +12,8 @@ export const dark = {
     primary: '#c49a4e',
     accent: '#E4C180',
     background: '#16181C',
+    scrollIndicator: '#ffffff44',
+    scrollIndicatorAccent: '#ffffffa7',
 }
 
 export function fetchTheme(aTheme) {

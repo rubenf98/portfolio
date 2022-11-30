@@ -1,5 +1,6 @@
 import React from 'react'
 import styled, { withTheme } from 'styled-components';
+import { middleWidth } from '../../helper';
 
 const Container = styled.section`
     width: 100%;
@@ -10,7 +11,9 @@ const Container = styled.section`
 `;
 
 const InfoContainer = styled.div`
-    width: 60%;
+    width: 80%;
+    max-width: ${middleWidth};
+    margin: auto;
     padding: 0px 20px;
     box-sizing: border-box;
 
@@ -30,15 +33,13 @@ const InfoContainer = styled.div`
         font-stretch: normal;
         font-style: normal;
         line-height: 0.96;
-        letter-spacing: -5.6px;
         margin: 27px 0px;
     }
 
     p {
-        font-size: 30px;
+        font-size: 20px;
         font-weight: normal;
         line-height: 2.23;
-        letter-spacing: -2.4px;
         opacity: .6;
     }
 `;
@@ -52,12 +53,12 @@ const Highlight = styled.div`
 function About({ theme }) {
     return (
         <Container>
-            <Highlight width="3%" background={theme.accent} />
+            <Highlight width="3%" background={theme.primary} />
             <InfoContainer primary={theme.primary}>
                 <h3>
-                    about me
+                    About me
                 </h3>
-                <h2> the researcher that does web development.</h2>
+                <h2>The researcher that does web development.</h2>
                 <p>
                     I'm a Portuguese researcher based in Madeira Island with a Master's degree in Informatics Engineering. Currently I'm enrolled in a PhD programme at University of Madeira, specializing in Artificial Intelligence.
                 </p>
@@ -71,7 +72,7 @@ function About({ theme }) {
                     In the future, I'd love to incorporate AI into my web projects in order to create something unique and innovative, therefore establishing my brand. I'd also like to explore WebGL towards creating fully immersive web-based AI applications.
                 </p> */}
             </InfoContainer>
-            <Highlight width="10%" background={theme.accent} />
+            <Highlight width="10%" background={theme.primary} />
         </Container>
     )
 }

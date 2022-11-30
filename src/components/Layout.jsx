@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Navbar from '../layout/Navbar';
+import Footer from '../layout/Footer';
 import { light, dark } from "../themes"
 import { connect } from "react-redux";
 import { ThemeProvider } from "styled-components";
@@ -36,7 +37,7 @@ function Layout({ children, theme }) {
                 <Content>
                     <Navbar />
                     {children}
-                    {/* <Footer /> */}
+                    <Footer />
                 </Content>
             </ThemeProvider>
         </Container>

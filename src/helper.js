@@ -7,11 +7,5 @@ export const dimensions = {
     "xxl": "1600px",
 };
 
-export const colors = {
-    "darkBackground": "575px",
-    "lightBackground": "576px",
-    "accent": "#e4c180",
-    "lg": "992px",
-    "xl": "1200px",
-    "xxl": "1600px",
-};
+export const middleWidth = "1400px";
+export const maxWidth = "1920px";

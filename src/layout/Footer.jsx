@@ -1,77 +1,189 @@
 import React from 'react'
-import styled from 'styled-components';
-import { colors } from '../helper';
+import styled, { withTheme, keyframes } from 'styled-components';
+import { dimensions, maxWidth, middleWidth } from '../helper';
 
-const customGray = "#dddddd90";
+const scroll = keyframes`
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-100vw, 0, 0);
+  }
+`;
 
-const Container = styled.div`
+const Container = styled.section`
     width: 100%;
-    padding: 30px 100px;
-    box-sizing: border-box;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+
+`;
+
+const EmailContainer = styled.div`
+    width: 100%;
+    padding: 0px;
+    position: relative;
+    min-height: clamp(130px, 22vw, 400px);
+    margin: auto;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    a {
+        font-size: clamp(40px, 10vw, 100px);
+        text-align: center;
+        margin: auto;
+        display: block;
+        font-weight: bold;
+        color: ${props => props.color};
+        font-family: 'Poppins', sans-serif;
+    }
+`;
+
+const ScrollingRow = styled.div`
+	position: absolute;
+	display: flex;
+	align-items: center;
+    top: 50%;
+    transform: translate(0, -50%);
+    z-index: -1;
+
+    p {
+        padding: 0px 50px;
+        animation: ${scroll} ;
+        animation-duration: 30s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+        will-change: transform;
+        transform-style: preserve-3d;
+        display: inline-block;
+        white-space: nowrap;
+        font-size: clamp(80px, 16vw, 300px);
+        margin: 0px;
+        font-weight: 900;
+        color: ${props => props.color};
+        text-shadow: ${props =>
+        "-1px -1px 0 " + props.stroke +
+        ",0   -1px 0 " + props.stroke +
+        ",1px -1px 0 " + props.stroke +
+        ",1px  0   0 " + props.stroke +
+        ",1px  1px 0 " + props.stroke +
+        ",0    1px 0 " + props.stroke +
+        ",-1px  1px 0 " + props.stroke +
+        ",-1px  0   0 " + props.stroke
+    };
+
+    }
+`;
+
+const LinksContainer = styled.div`
+    width: 100%;
+    max-width: ${middleWidth};
     display: flex;
     justify-content: space-between;
     align-items: middle;
-    position: relative;
-    bottom: 0;
+    margin: auto;
+    padding: 30px 20px;
+    box-sizing: border-box;
 `;
 const Copyright = styled.p`
-    color: ${customGray};
+    font-size: 20px;
+    margin: auto 0px;
+
+    span {
+        font-weight: bold;
+        text-decoration: underline;
+    }
 `;
 
 const Social = styled.div`
+    width: 50%;
+    background-color: ${props => props.primary};
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
     align-items: middle;
     cursor: pointer;
+    gap: 30px;
 
     a {
-        margin: 0px 5px;
-        color: #fff;
-        border-radius: 50px;
-        width:50px;
-        height: 50px;
-        border: 1px solid ${customGray};
-        display: flex;
-        align-items:center;
-        justify-content: center;
-
-        &:hover {
-        color: ${colors.accent};
-
-            background: #dddddd1f;
-            border-color: #dddddd1f;
-        
-    }
-
-        svg {
-            width:20px;
-            height: 20px;
-        }
+        color: ${props => props.color};
+        text-decoration: none;
+        transition: opacity .3s linear;
+        font-size: 20px;
+        line-height: 55px;
+        text-transform: uppercase;
+        font-weight: 400;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 2.75;
+        letter-spacing: -0.92px;
+        margin: 0px;
     }
 `;
 
+const Background = styled.div`
+    width: 50%;
+    position: absolute;
+    height: 130px;
+    bottom: 0px;
+    right: 0px;
+    background-color: ${props => props.background};
+    z-index: -1;
+`;
+
+const Top = styled.div`
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    color: ${props => props.color};
+    width: 100%;
+    max-width: ${middleWidth};
+    text-align: right;
+    cursor: pointer;
+    font-size: 24px;
+`;
+
 const year = new Date().getFullYear();
-function Footer() {
+function Footer({ theme }) {
     return (
         <Container>
-            <Copyright>
-                © Rúben Freitas – {year}
-            </Copyright>
+            <Top color={theme.primary} >top</Top>
 
-            <Social>
-                <a href="https://www.instagram.com/jrubenf98/" target="_blank" rel="noreferrer">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12.0047 5.88072C8.61135 5.88072 5.87426 8.62129 5.87426 12.0189C5.87426 15.4166 8.61135 18.1572 12.0047 18.1572C15.398 18.1572 18.1351 15.4166 18.1351 12.0189C18.1351 8.62129 15.398 5.88072 12.0047 5.88072ZM12.0047 16.0096C9.81183 16.0096 8.01911 14.2199 8.01911 12.0189C8.01911 9.81795 9.80649 8.0283 12.0047 8.0283C14.2029 8.0283 15.9903 9.81795 15.9903 12.0189C15.9903 14.2199 14.1976 16.0096 12.0047 16.0096V16.0096ZM19.8158 5.62964C19.8158 6.42563 19.1756 7.06136 18.3859 7.06136C17.5909 7.06136 16.956 6.42029 16.956 5.62964C16.956 4.83899 17.5963 4.19792 18.3859 4.19792C19.1756 4.19792 19.8158 4.83899 19.8158 5.62964ZM23.8761 7.08272C23.7854 5.16486 23.3479 3.46603 21.9447 2.06637C20.5468 0.666703 18.8501 0.22864 16.9347 0.13248C14.9605 0.0202931 9.04352 0.0202931 7.0694 0.13248C5.15931 0.223298 3.46264 0.661361 2.05941 2.06103C0.656189 3.46069 0.224017 5.15952 0.127979 7.07738C0.0159342 9.05401 0.0159342 14.9785 0.127979 16.9552C0.218681 18.873 0.656189 20.5719 2.05941 21.9715C3.46264 23.3712 5.15398 23.8093 7.0694 23.9054C9.04352 24.0176 14.9605 24.0176 16.9347 23.9054C18.8501 23.8146 20.5468 23.3765 21.9447 21.9715C23.3425 20.5719 23.78 18.873 23.8761 16.9552C23.9881 14.9785 23.9881 9.05935 23.8761 7.08272V7.08272ZM21.3257 19.076C20.9096 20.1231 20.1039 20.9298 19.0528 21.3518C17.4789 21.9769 13.7441 21.8326 12.0047 21.8326C10.2653 21.8326 6.52519 21.9715 4.95656 21.3518C3.91082 20.9351 3.10516 20.1285 2.68366 19.076C2.05941 17.5001 2.20347 13.7605 2.20347 12.0189C2.20347 10.2774 2.06475 6.53247 2.68366 4.96186C3.09983 3.91478 3.90548 3.1081 4.95656 2.68607C6.53052 2.06103 10.2653 2.20527 12.0047 2.20527C13.7441 2.20527 17.4842 2.06637 19.0528 2.68607C20.0986 3.10276 20.9042 3.90944 21.3257 4.96186C21.95 6.53782 21.8059 10.2774 21.8059 12.0189C21.8059 13.7605 21.95 17.5054 21.3257 19.076Z" fill="currentColor"></path>
-                    </svg>
-                </a>
-                <a href="https://scholar.google.com/citations?user=1xnrzDMAAAAJ" target="_blank" rel="noreferrer">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20px" height="20px">
-                        <path d="M 11 4 L 3 9 L 8.4921875 9 C 8.4715892 9.0754986 8.4383718 9.1441171 8.421875 9.2226562 C 8.375875 9.4646562 8.3398437 9.7308125 8.3398438 10.007812 C 8.3398438 13.578812 11.990234 13.175781 11.990234 13.175781 L 11.990234 14.085938 C 11.990234 14.454937 12.47425 14.327172 12.53125 15.076172 C 12.28925 15.076172 7.4746094 14.937547 7.4746094 18.185547 C 7.4746094 21.445547 11.724609 21.285156 11.724609 21.285156 C 11.724609 21.285156 16.632812 21.504656 16.632812 17.472656 C 16.634813 15.063656 13.822266 14.2795 13.822266 13.3125 C 13.822266 12.3335 15.941406 12.045906 15.941406 9.7539062 C 15.941406 8.7519062 15.872828 8.03825 15.423828 7.53125 C 15.388828 7.49625 15.366031 7.4722188 15.332031 7.4492188 C 15.324304 7.4420199 15.31448 7.4367774 15.306641 7.4296875 L 15.429688 7.4296875 L 17.5 5.8769531 L 17.5 8 A 0.50005 0.50005 0 0 0 17.511719 8.1152344 A 1.0001 1.0001 0 0 0 17 9 L 17 10 A 1.0001 1.0001 0 1 0 19 10 L 19 9 A 1.0001 1.0001 0 0 0 18.488281 8.1152344 A 0.50005 0.50005 0 0 0 18.5 8 L 18.5 5.125 L 20 4 L 11 4 z M 11.691406 7.0527344 C 11.979219 7.0397031 12.268922 7.109625 12.544922 7.265625 C 12.751922 7.369625 12.946141 7.518125 13.119141 7.703125 C 13.476141 8.060125 13.7765 8.5784531 13.9375 9.1894531 C 14.3175 10.640453 13.823828 12.035781 12.798828 12.300781 C 11.784828 12.587781 10.654672 11.641172 10.263672 10.201172 C 10.090672 9.4991719 10.114547 8.8202969 10.310547 8.2792969 C 10.312395 8.2723193 10.316443 8.2666961 10.318359 8.2597656 C 10.321722 8.2581149 10.32682 8.253536 10.330078 8.2519531 C 10.386262 8.0380596 10.478099 7.8461668 10.589844 7.6875 C 10.795388 7.3872165 11.066477 7.1838352 11.404297 7.09375 C 11.499297 7.07075 11.595469 7.0570781 11.691406 7.0527344 z M 12.082031 15.685547 C 13.775031 15.558547 15.216313 16.490813 15.320312 17.757812 C 15.390313 19.013813 14.087812 20.131094 12.382812 20.246094 C 10.689813 20.361094 9.2274844 19.441547 9.1464844 18.185547 C 9.0654844 16.918547 10.377031 15.812547 12.082031 15.685547 z" fill="currentColor" />
-                    </svg>
-                </a>
-            </Social>
+
+            <EmailContainer color={theme.text}>
+                <a href='mailto:info@ruben-freitas.pt'>info@ruben-freitas.pt</a>
+                <ScrollingRow stroke={theme.primary} color={theme.background}>
+                    <p>let's work together</p>
+                    <p>let's work together</p>
+                </ScrollingRow>
+            </EmailContainer>
+
+
+            <LinksContainer>
+
+                <Background background={theme.primary} />
+                <Copyright>
+                    © All right reserved <span>rúbenfreitas – {year}</span>
+                </Copyright>
+
+                <Social color={theme.background} primary={theme.primary}>
+                    <a href="https://www.instagram.com/jrubenf98/" target="_blank" rel="noreferrer">
+                        github
+                    </a>
+                    <a href="https://www.instagram.com/jrubenf98/" target="_blank" rel="noreferrer">
+                        instagram
+                    </a>
+                    <a href="https://scholar.google.com/citations?user=1xnrzDMAAAAJ" target="_blank" rel="noreferrer">
+                        scholar
+                    </a>
+                </Social>
+            </LinksContainer>
         </Container >
     )
 }
 
-export default Footer
+export default withTheme(Footer)

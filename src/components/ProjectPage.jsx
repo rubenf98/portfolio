@@ -195,7 +195,7 @@ const Back = styled(Link)`
 `;
 
 
-function ProjectPage({ title, subtitle, imageSrc, motivation, theme }) {
+function ProjectPage({ title, subtitle, imageSrc, motivation, theme, color }) {
     const [degree, setDegree] = useState(40)
 
     const handleScroll = useCallback(() => {
@@ -233,7 +233,7 @@ function ProjectPage({ title, subtitle, imageSrc, motivation, theme }) {
                 <p>{subtitle}</p>
                 <img src={imageSrc + "1.jpg"} alt="" />
             </Header>
-            <Description primary={theme.primary} secundary={theme.background}>
+            <Description primary={color} secundary={theme.background}>
                 <h2>{title}</h2>
                 {motivation}
             </Description>

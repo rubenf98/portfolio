@@ -36,7 +36,7 @@ const Title = styled.div`
     }
 
     h2 {
-        font-size: 30px;
+        font-size: 34px;
         color: ${props => props.primary};
         letter-spacing: 5px;
     }
@@ -45,11 +45,11 @@ const Title = styled.div`
         width: 60%;
         margin: auto;
         display: block;
-        font-size: 18px;
+        font-size: 20px;
     }
 
     div {
-        font-size: 16px;
+        font-size: 20px;
         margin-top: 30px;
         color: ${props => props.primary};
         cursor: pointer;

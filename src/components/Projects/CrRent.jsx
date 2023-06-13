@@ -4,6 +4,7 @@ import ProjectPage from '../ProjectPage'
 function Crrent() {
     return (
         <ProjectPage
+            color="#7D1CC4"
             title="CR Rent"
             subtitle="Interaquatic dashboard that tries to understand how the ocean works, through Mobile Apps, IoT devices, AI algorithms and interactive environments."
             imageSrc="/image/projects/crrent/"

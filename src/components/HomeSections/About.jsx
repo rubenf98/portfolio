@@ -20,9 +20,9 @@ const InfoContainer = styled.div`
     h3 {
         color: ${props => props.primary};
         margin: 0px;
-        font-size: 30px;
-        font-weight: 300;
-        letter-spacing: 6px;
+        font-size: 24px;
+        font-weight: bold;
+        letter-spacing: 3px;
         
     }
 
@@ -40,7 +40,7 @@ const InfoContainer = styled.div`
         font-size: 20px;
         font-weight: normal;
         line-height: 2.23;
-        opacity: .6;
+        width: 50%;
     }
 `;
 

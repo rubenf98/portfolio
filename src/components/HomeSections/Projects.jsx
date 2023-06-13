@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { keyframes, withTheme } from 'styled-components';
-import { maxWidth } from '../../helper';
+import { maxWidth, middleWidth } from '../../helper';
 import AnimationContainer from '../AnimationContainer';
 
 const zoom = keyframes`
@@ -10,87 +10,85 @@ const zoom = keyframes`
   }
 
   100% {
-    scale: 1.1;
+    scale: 1.05;
   }
 `;
 
 const transition = keyframes`
   0% {
     width: 100%;
-    height: 60vh;
+    height: 50vh;
   }
 
   45% {
     width: 0%;
-    height: 60vh;
+    height: 50vh;
   }
   60% {
     width: 0%;
-    height: 60vh;
+    height: 50vh;
   }
 
   100% {
     width: 100%;
-    height: 60vh;
+    height: 50vh;
   }
 `;
 
 const Container = styled.div`
     width: 100%;
-    max-width: ${maxWidth};
-    margin: 200px auto;
+    max-width: ${middleWidth};
+    margin: 100px auto;
     display: block;
-padding: 0px 20px;
-box-sizing: border-box;
-    
+    padding: 0px 20px;
+    box-sizing: border-box;
 `;
 
 const Title = styled.h3`
-    line-height: 4.57;
-    font-size: 23px;
-    letter-spacing: 4.6px;
+    line-height: 94%;
+    font-size: 24px;
+    letter-spacing: 3px;
     color: ${props => props.color};
-    margin: 0;
-    text-align: right;
+    margin: 0px 0px 30px 0px;
     display: block;
     width: 100%;
-    position: absolute;
-    top: -100px;
-    right: 40px;
+
 `;
 
-const More = styled.h3`
-    line-height: 4.57;
-    font-size: 23px;
-    letter-spacing: 4.6px;
+const More = styled(Link)`
+    line-height: 94%;
+    font-size: 24px;
+    letter-spacing: 3px;
+    max-width: ${maxWidth};
     color: ${props => props.color};
-    margin: 0;
+    margin: 30px 0px;
     text-align: right;
     display: block;
     width: 100%;
-    position: absolute;
-    bottom: -90px;
-    right:0 ;
+    font-weight: bold;
+    text-decoration: none;
 `;
 
 
 const Content = styled.div`
-    width: 80%;
+    width: 100%;
     margin: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
     position: relative;
+    gap: 50px;
 `;
 
 
 const ProjectList = styled.ul`
     list-style-type: none;
-    padding: 0px 40px 0px 0px;
+    padding: 0px 0px 0px 0px;
     box-sizing: border-box;
     width: 30%;
     position: relative;
+    overflow: visible;
     
     li {
         position: inherit;
@@ -110,8 +108,8 @@ const Project = styled.div`
         display: block;
         color: inherit;
         text-decoration: none;
-        line-height: 70px;
-        font-size: ${props => props.active ? "65px" : "60px"};
+        line-height: 120%;
+        font-size: ${props => props.active ? "55px" : "50px"};
         box-sizing: border-box;
         margin-bottom: 0px;
         opacity: ${props => props.active ? 1 : .7};
@@ -132,7 +130,7 @@ const ProjectVideo = styled.div`
     box-sizing: border-box;
     pointer-events: none;
     border-radius: 0px;
-    width: 65%;
+    width: 70%;
     height: 100%;
     display: flex;
     align-items: center;
@@ -142,7 +140,7 @@ const ProjectVideo = styled.div`
     .wrapper {
         overflow: hidden;
         border-radius: inherit;
-        height: 60vh;
+        height: 50vh;
         animation: ${transition} 1s cubic-bezier(.21,1.03,.7,1) forwards;
         position: relative;
         box-shadow: 0 0 20px 0px rgba(0,0,0,.2);
@@ -184,9 +182,10 @@ function Projects({ theme }) {
 
     return (
         <Container >
+            <Title color={theme.primary}>My projects</Title>
             <Content >
                 <ProjectList >
-                    <Title color={theme.primary}>My projects</Title>
+
                     {items.map((item, index) => (
                         <Project
                             active={item.id == active.id}
@@ -194,10 +193,7 @@ function Projects({ theme }) {
                             onMouseOver={() => handleMouseOver(item)}
                         >
                             <li>
-                                <Link
-
-                                    className='title' to={"/" + item.name.replace(/\s/g, "").toLowerCase()}
-                                >
+                                <Link className='title' to={"/projects/" + item.name.replace(/\s/g, "").toLowerCase()}>
                                     {item.name}
                                 </Link>
                                 <span>{item.description}</span>
@@ -210,10 +206,11 @@ function Projects({ theme }) {
                     <div className="wrapper">
                         <img src={"/image/projects/thumbnail/" + source + ".jpg"} />
                     </div>
-                    <More color={theme.primary}>See all</More>
+
                 </ProjectVideo>
 
             </Content>
+            <More to="/projects" color={theme.primary}>See all</More>
         </Container>
     );
 }

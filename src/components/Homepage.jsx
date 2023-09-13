@@ -136,7 +136,7 @@ function Homepage() {
         <div>
             <Container>
                 <SocialContainer color="white">
-                    <a rel="noreferrer noopener" target="_blank" href="https://github.com/rubenf98">github</a>
+                    <a rel="noreferrer noopener" target="_blank" href="https://www.linkedin.com/in/rúben-freitas">linkedin</a>
                     <a rel="noreferrer noopener" target="_blank" href="https://scholar.google.com/citations?user=1xnrzDMAAAAJ">scholar</a>
                     <a rel="noreferrer noopener" target="_blank" href="https://www.instagram.com/jrubenf98/">instagram</a>
                 </SocialContainer>

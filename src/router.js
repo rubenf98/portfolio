@@ -7,7 +7,7 @@ function router() {
     return (
         <Layout>
             <Routes>
-                <Route exact path="/" element={<Homepage />} />
+                <Route path="*" element={<Homepage />} />
             </Routes>
         </Layout>
     );

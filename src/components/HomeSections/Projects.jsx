@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { keyframes, withTheme } from 'styled-components';
-import { maxWidth, middleWidth } from '../../helper';
+import { dimensions, maxWidth, middleWidth } from '../../helper';
 import AnimationContainer from '../AnimationContainer';
 
 const zoom = keyframes`
@@ -79,6 +79,11 @@ const Content = styled.div`
     box-sizing: border-box;
     position: relative;
     gap: 50px;
+    
+
+    @media (max-width: ${dimensions.lg}) {
+        flex-wrap: wrap;
+    }
 `;
 
 
@@ -97,6 +102,15 @@ const ProjectList = styled.ul`
         cursor: pointer;
         white-space: nowrap;
         text-align: right;
+    }
+
+    @media (max-width: ${dimensions.lg}) {
+            width: 100%;
+
+            li {
+                text-align: left;
+            }
+
     }
 `;
 
@@ -123,7 +137,25 @@ const Project = styled.div`
         font-size: ${props => props.active ? "22px" : "18px"};
         transition: all .3s ease;
     }   
+
+    @media (max-width: ${dimensions.lg}) {
+        .title {
+            font-size: clamp(30px, 2vw, 50px);
+            opacity: 1;
+        }
+
+        span {
+            font-size: clamp(16px, 2vw, 20px);
+            opacity: 1;
+            
+        }
+    }
+
+    
 `;
+
+
+
 
 
 const ProjectVideo = styled.div`
@@ -136,6 +168,7 @@ const ProjectVideo = styled.div`
     align-items: center;
     flex-wrap: wrap;
     position: relative;
+    z-index: 8;
 
     .wrapper {
         overflow: hidden;
@@ -144,6 +177,8 @@ const ProjectVideo = styled.div`
         animation: ${transition} 1s cubic-bezier(.21,1.03,.7,1) forwards;
         position: relative;
         box-shadow: 0 0 20px 0px rgba(0,0,0,.2);
+        border-top-right-radius: 60px;
+        border-bottom-left-radius: 60px;
     }
 
     img {
@@ -151,23 +186,39 @@ const ProjectVideo = styled.div`
         width: 100%;
         height: 100%;
         object-fit: cover;
-       
         display: block;
         margin: auto;
         animation: ${zoom} 3s ease-out forwards;
         animation-delay: 1s;
     }
+
+    @media (max-width: ${dimensions.lg}) {
+        display: none;
+    }
 `;
 
-const items = [
-    { id: 1, name: "Dom Design", description: "Design Agency", video: "dom" },
-    { id: 2, name: "Marco Abreu", description: "Upholsterer & Decorator", video: "marcoabreu" },
-    { id: 3, name: "Plaza II", description: "Condominium Management", video: "plaza" },
-    { id: 4, name: "CR Rent", description: "Rent-a-car", video: "crrent" },
-];
 
-function Projects({ theme }) {
-    const [active, setActive] = useState(items[0])
+const ProjectImg = styled(ProjectVideo)`
+    display: none;
+    width: 100%;
+
+    img {
+        animation: none;
+    }
+
+    @media (max-width: ${dimensions.lg}) {
+        display: block;
+
+        img {
+            margin-top: 20px;
+            margin-bottom: 50px;
+        }
+    }
+`;
+
+
+function Projects({ theme, text }) {
+    const [active, setActive] = useState(text.items[0])
     const [source, setSource] = useState("dom")
 
     function handleMouseOver(item) {
@@ -179,14 +230,13 @@ function Projects({ theme }) {
 
     }
 
-
     return (
         <Container >
-            <Title color={theme.primary}>My projects</Title>
+            <Title color={theme.primary}>{text.title}</Title>
             <Content >
                 <ProjectList >
 
-                    {items.map((item, index) => (
+                    {text.items.map((item, index) => (
                         <Project
                             active={item.id == active.id}
                             key={index}
@@ -197,6 +247,13 @@ function Projects({ theme }) {
                                     {item.name}
                                 </Link>
                                 <span>{item.description}</span>
+
+                                <ProjectImg key={active.id}>
+
+                                    <img src={"/image/projects/thumbnail/" + item.video + ".jpg"} />
+
+
+                                </ProjectImg>
                             </li>
                         </Project>
                     ))}
@@ -210,7 +267,7 @@ function Projects({ theme }) {
                 </ProjectVideo>
 
             </Content>
-            <More to="/projects" color={theme.primary}>See all</More>
+            <More to="/projects" color={theme.primary}>{text.link}</More>
         </Container>
     );
 }

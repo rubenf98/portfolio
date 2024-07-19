@@ -2,6 +2,7 @@ import { types } from "./types";
 
 export const initialState = {
     theme: "dark",
+    language: "en",
 }
 
 export default (state = initialState, action = {}) => {
@@ -11,6 +12,12 @@ export default (state = initialState, action = {}) => {
             return {
                 ...state,
                 theme: action.payload,
+            };
+
+        case `${types.SET_LANGUAGE}`:
+            return {
+                ...state,
+                language: action.payload,
             };
         default:
             return state

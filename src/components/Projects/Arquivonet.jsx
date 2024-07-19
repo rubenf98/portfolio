@@ -2,9 +2,10 @@ import React from 'react'
 import ProjectPage from '../ProjectPage'
 import { connect } from 'react-redux';
 
-function Fastrope(props) {
+function Arquivonet(props) {
     const { text, fields } = require('../../assets/' + props.language + "/projects");
-    const content = text.fastrope
+
+    const content = text.arquivonet
 
     return (
         <ProjectPage
@@ -42,4 +43,4 @@ const mapStateToProps = (state) => {
 export default connect(
     mapStateToProps,
     null
-)(Fastrope);
+)(Arquivonet);

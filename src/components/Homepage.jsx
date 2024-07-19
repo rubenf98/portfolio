@@ -1,24 +1,21 @@
 import React from 'react';
-import styled from 'styled-components';
-import { dimensions } from '../helper';
 import Header from './HomeSections/Header';
 import About from './HomeSections/About';
-import Sentence from './HomeSections/Sentence';
 import Projects from './HomeSections/Projects';
 import Publications from './HomeSections/Publications';
-import Keywords from './HomeSections/Keywords';
+import { connect } from 'react-redux';
 
 
-function Homepage() {
-
+function Homepage({ language }) {
+    const { text } = require('../assets/' + language + "/homepage");
     return (
         <div>
-            <Header />
+            <Header text={text.header} />
             {/* <Keywords /> */}
-            <Sentence />
-            <About />
-            <Projects />
-            <Publications />
+            {/* <Sentence /> */}
+            <About text={text.about} />
+            <Projects text={text.projects} />
+            <Publications text={text.publications} />
             {/* 
             <Keywords />
             <About />
@@ -30,4 +27,13 @@ function Homepage() {
     );
 }
 
-export default Homepage;
+const mapStateToProps = (state) => {
+    return {
+        language: state.application.language,
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    null
+)(Homepage);

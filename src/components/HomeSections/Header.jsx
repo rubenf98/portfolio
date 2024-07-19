@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import styled, { withTheme, keyframes } from 'styled-components';
 import { dimensions } from '../../helper';
-import { text } from "../../assets/homepage";
 import { connect } from "react-redux";
-import { setLightTheme, setDarkTheme } from "../../redux/application/actions";
+import { setLightTheme, setDarkTheme, setLanguage } from "../../redux/application/actions";
 
 const scroll = keyframes`
   0% {
     transform: translateY(0%);
   }
   50% {
-    transform: translateY(120px);
+    transform: translateY(90px);
   }
   100% {
     transform: translateY(0%);
@@ -25,6 +24,14 @@ const Container = styled.section`
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    padding-top: 100px;
+    box-sizing: border-box;
+
+    @media (max-width: ${dimensions.md}) {
+        flex-direction: column;
+        gap: 20px;
+    }
 `;
 
 const ImageContainer = styled.div`
@@ -36,27 +43,24 @@ const ImageContainer = styled.div`
 
     @media (max-width: ${dimensions.md}) {
         justify-content: flex-start;
+        flex-wrap: wrap;
     }
 
     h1 {
-        line-height: 107px;
-        font-size: 124px;
+        line-height: 90%;
+        font-size: clamp(60px, 6vw, 124px);
         letter-spacing: -9.92px;
         padding-left: 16px;
 
         @media (max-width: ${dimensions.md}) {
-            position: absolute;
-            bottom: -100px;
-            left: 0;
-            font-size: 60px;
-            left: 50%;
-            transform: translate(-50%, 0);
+            margin: -150px auto auto auto;
             font-weight: bold;
             font-stretch: normal;
             font-style: normal;
-            line-height: 0.85;
+            line-height: .86;
             letter-spacing: -4.8px;
             z-index: 5;
+            padding-left: 0px;
         }
     }
 
@@ -70,7 +74,18 @@ const LanguageContainer = styled.div`
     top: 60px;
     right: 60px;
     position: absolute;
-    
+
+    @media (max-width: ${dimensions.md}) {
+        display: none;
+    }
+`;
+
+const MobileLanguageContainer = styled.div`
+    display: none;
+
+    @media (max-width: ${dimensions.md}) {
+        display: flex;
+    }
 `;
 
 const LanguageIndicator = styled.span`
@@ -93,12 +108,15 @@ const ImageHeaderContainer = styled.div`
     z-index: 3;
     position: relative;
     padding-top: 30px;
+    box-sizing: border-box;
     display: flex;
 
     @media (max-width: ${dimensions.sm}) {
         width: 80%;
     }
 
+    
+    
     .background {
         z-index: -1;
         position: absolute;
@@ -107,6 +125,8 @@ const ImageHeaderContainer = styled.div`
         width: 70%;
         height: 100%;
         background-color: ${props => props.background};
+
+        
     }
 
     img {
@@ -185,55 +205,58 @@ const ThemeSwitch = styled.img`
 const ScrollIndicator = styled.div`
     position: absolute;
     left: 50%;
-    bottom: -90px;
+    bottom: -80px;
     transform: translate(-50%, 0);
-    width: 1px; height: 180px;
+    width: 1px; 
+    height: 150px;
     background: ${props => props.background};
 
     .active {
         position: absolute;
         left: calc(50% - 1px);
-        bottom: 120px;
+        bottom: 90px;
         transform: translate(-50%, 0);
-        width: 2px; height: 60px;
+        width: 2px; 
+        height: 60px;
         background: ${props => props.accent};
         animation: ${scroll} 4s ease-in-out infinite;
     }
 
     @media (max-width: ${dimensions.md}) {
         right: 20px;
+        bottom: -40px;
+        height: 120px;
+
+        .active {
+            bottom: 90px;
+            height: 30px;
+        }
     }
 `;
 
 
 
 
-function Header({ theme, reduxTheme, setDarkTheme, setLightTheme }) {
-    const [active, setActive] = useState("pt")
+function Header({ theme, reduxTheme, setDarkTheme, setLightTheme, setLanguage, language, text }) {
+    function handleLanguageClick(val) {
 
-    useEffect(() => {
-        setActive(localStorage.getItem("language"));
-    }, []);
-
-    function handleLanguageClick(language) {
-        localStorage.setItem("language", language);
-        setActive(language)
+        setLanguage(val)
     }
-
+    console.log(language)
     return (
         <Container>
 
             <LanguageContainer >
                 <LanguageIndicator
                     primary={theme.primary}
-                    active={active == "pt"}
+                    active={language == "pt"}
                     onClick={() => handleLanguageClick("pt")}
                 >
                     pt
                 </LanguageIndicator>
                 <LanguageIndicator
                     primary={theme.primary}
-                    active={active == "en"}
+                    active={language == "en"}
                     onClick={() => handleLanguageClick("en")}
                 >
                     en
@@ -243,7 +266,7 @@ function Header({ theme, reduxTheme, setDarkTheme, setLightTheme }) {
             <SocialContainer>
                 <a rel="noreferrer noopener" target="_blank" href="https://github.com/rubenf98">github</a>
                 <a className='middle' rel="noreferrer noopener" target="_blank" href="https://scholar.google.com/citations?user=1xnrzDMAAAAJ">scholar</a>
-                <a rel="noreferrer noopener" target="_blank" href="https://www.instagram.com/jrubenf98/">instagram</a>
+                <a rel="noreferrer noopener" target="_blank" href="https://www.linkedin.com/in/r%C3%BAben-freitas/">linkedin</a>
             </SocialContainer>
 
             <ImageContainer>
@@ -252,9 +275,26 @@ function Header({ theme, reduxTheme, setDarkTheme, setLightTheme }) {
                     <div className='background' />
                 </ImageHeaderContainer>
 
-                {text[localStorage.getItem("language")].header.title}
+                {text.title}
 
             </ImageContainer>
+
+            <MobileLanguageContainer >
+                <LanguageIndicator
+                    primary={theme.primary}
+                    active={language == "pt"}
+                    onClick={() => handleLanguageClick("pt")}
+                >
+                    pt
+                </LanguageIndicator>
+                <LanguageIndicator
+                    primary={theme.primary}
+                    active={language == "en"}
+                    onClick={() => handleLanguageClick("en")}
+                >
+                    en
+                </LanguageIndicator>
+            </MobileLanguageContainer>
 
             <ThemeSwitch
                 src={reduxTheme === 'light' ? "/icon/light_theme_switch.svg" : "/icon/dark_theme_switch.svg"}
@@ -273,6 +313,7 @@ function Header({ theme, reduxTheme, setDarkTheme, setLightTheme }) {
 const mapStateToProps = (state) => {
     return {
         reduxTheme: state.application.theme,
+        language: state.application.language,
     };
 };
 
@@ -281,6 +322,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setLightTheme: () => dispatch(setLightTheme()),
         setDarkTheme: () => dispatch(setDarkTheme()),
+        setLanguage: (lang) => dispatch(setLanguage(lang)),
     };
 };
 

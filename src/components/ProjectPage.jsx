@@ -41,7 +41,7 @@ const Header = styled.section`
     }
 
     h1 {
-        font-size: clamp(60px, 8vw, 90px);
+        font-size: clamp(40px, 8vw, 90px);
         margin: 0px;
         margin-bottom: 20px;
         color: ${props => props.color};
@@ -64,10 +64,9 @@ const Header = styled.section`
         display: block;
         transition: all .3s ease;
         transform-style: preserve-3d;
-        transform: ${props => "rotate3d(1, 0, 0, " + props.degree + "deg)"};
-        /* transform: rotate3d(0, 0,0,0deg); */
-
-        
+        transform: ${props => "rotate3d(1, 0, 0, " + props.degree + "deg)"};      
+        padding: 10px 30px;
+        box-sizing: border-box;
     }
 
     @media (max-width: ${dimensions.md}){
@@ -89,10 +88,12 @@ const Description = styled.section`
     max-width: ${middleWidth};
     margin: 50px auto 200px auto;
     display: block;
-    color: ${props => props.secundary};
+    color: #16181C;
+    background-color: white;
+    
 
-    @media (max-width: ${dimensions.md}){
-        padding: 0px 30px;
+    @media (max-width: ${middleWidth}){
+        padding: 30px;
         box-sizing: border-box;
     }
     
@@ -174,9 +175,8 @@ const Mockup = styled.img`
     display: block;
 
     @media (max-width: ${dimensions.md}){
-        margin: 50px auto 50px auto;
+        padding: 0px auto 50px auto;
         width: 90%;
-        box-shadow: 0px 0px 25px 0px rgba(0,0,0,.1);
         box-sizing: border-box;
     }
 `;
@@ -186,12 +186,13 @@ const Back = styled(Link)`
     top: 50px;
     left: 50px;
     color: ${props => props.color};
-    width: 100%;
     max-width: ${middleWidth};
     cursor: pointer;
     font-size: 24px;
     text-align: left;
     text-decoration: none;
+    z-index: -2;
+    display: inline-block;
 `;
 
 

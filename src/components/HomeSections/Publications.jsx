@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled, { withTheme } from 'styled-components';
 import { dimensions, middleWidth } from '../../helper';
 import { SeeMore } from '../../icons';
@@ -9,6 +9,7 @@ const Container = styled.section`
     width: 100%;
     max-width: ${middleWidth};
     margin: auto;
+    z-index: 8;
 
     @media (max-width: ${dimensions.xl}) {
         width: 80%;
@@ -29,6 +30,8 @@ const Title = styled.div`
     padding: 20px;
     box-sizing: border-box;
     text-align: center;
+    background-color: ${({ theme }) => theme.background};
+
 
     @media (max-width: ${dimensions.md}) {
         width: 100%;
@@ -62,6 +65,8 @@ const Papers = styled.div`
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    background-color: ${({ theme }) => theme.background};
+
 
     @media (max-width: ${dimensions.md}) {
         width: 100%;
@@ -126,70 +131,56 @@ const Paper = styled.div`
 
         
     }
+
+    @media (max-width: ${dimensions.md}) {
+            width: 60%;
+            margin: 20px auto ;
+
+    }
     
 `;
 
 
-const items = [
-    {
-        title: "Dive Reporter-Mobile App for Counting Underwater Marine Biodiversity",
-        description: "Tablet application designed for scuba divers and dive operators to report species during post-dive surveys.",
-        year: "2022",
-        to: "https://www.authorea.com/doi/full/10.22541/au.166516587.77115447"
-    },
-    {
-        title: "Deep Learning and the Oceans",
-        description: "Research vision for DL in the oceans, collating applications and use cases, identifying opportunities, constraints, and open research challenges.",
-        year: "2022",
-        to: "https://ieeexplore.ieee.org/abstract/document/9771134"
-    },
-    {
-        title: "Web-based interface for environmental niche modelling",
-        description: "A web-based user interface is proposed using Ecological Niche Modelling (ENM) as an automated alerting mechanism towards ecological awareness.",
-        year: "2021",
-        to: "https://digituma.uma.pt/handle/10400.13/3980"
-    },
-    {
-        title: "A New Signal of Tropicalization in the Northeast Atlantic: The Spread of the Spotfin Burrfish",
-        description: "Analysing occurrences of the spotfin burrfish, Chilomycterus reticulatus (Linnaeus, 1958), in the Madeira Archipelago (NE Atlantic) between 1898 and 2021.",
-        year: "2021",
-        to: "https://www.mdpi.com/1424-2818/13/12/639"
-    },
-    {
-        title: "Virtual Reality Exposure Treatment in Phobias: a Systematic Review",
-        description: "Comparison between the relative efficacy of virtual reality therapy exposure versus in vivo therapy exposure among individuals suffering from phobias.",
-        year: "2021",
-        to: "https://dl.acm.org/doi/abs/10.1145/3391614.3399395"
-    },
-    {
-        title: "INTERAQUATICA: Designing Interactive Aquatic Experiences with Geodesic Domes",
-        description: "Explore further the Human Computer Biosphere Interaction concept in aquatic settings, based on existing techniques for prototyping geodesic domes, and designing them as five marine megafauna species, for the on-and off-shore locations.",
-        year: "2020",
-        to: "https://link.springer.com/article/10.1007/s11126-021-09935-6"
-    },
-];
-
-
-function Publications({ theme }) {
+function Publications({ theme, text }) {
     const [visible, setVisible] = useState(3);
+
 
     const handleViewMore = () => {
         if (visible === 3) {
-            setVisible(items.length);
+            setVisible(text.items.length);
         } else setVisible(3);
 
     }
+
+    useEffect(() => {
+        // Handler to call on window resize
+        function handleResize() {
+            // Set window width/height to state
+            if (window.innerWidth < 768) {
+                setVisible(1)
+            } else {
+                setVisible(3)
+            }
+
+        }
+        // Add event listener
+        window.addEventListener("resize", handleResize);
+        // Call handler right away so state gets updated with initial window size
+        handleResize();
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
     return (
 
         <Container>
             <Title primary={theme.primary}>
-                <h2>Scientific Publications.</h2>
-                <p>Over the years, I have been in practical research activities, resulting in several scientific publications involving interactive web-based systems, human-centered ML and interactive ENM.</p>
+                <h2>{text.title}</h2>
+                <p>{text.description}</p>
 
-                <div onClick={handleViewMore}>view all articles</div>
+                <div onClick={handleViewMore}>{visible > 3 ? text.less : text.more} </div>
             </Title>
             <Papers >
-                {items.slice(0, visible).map((item, index) => (
+                {text.items.slice(0, visible).map((item, index) => (
                     <Paper primary={theme.primary} key={index}>
                         <h4>{item.title}, {item.year}</h4>
                         <p>{item.description}</p>

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import styled, { withTheme, keyframes } from 'styled-components';
-import { middleWidth } from '../helper';
-import { items } from '../projects';
+import { dimensions, middleWidth } from '../helper';
+import { connect } from 'react-redux';
 
 const zoom = keyframes`
   0% {
@@ -44,26 +44,20 @@ const Project = styled.div`
         width: 40%;
 
         h2 {
-            font-size: clamp(40px, 10vw, 70px);
+            font-size: clamp(36px, 3vw, 50px);
             margin: 0px;
-            margin-bottom: 60px;
-            line-height: 94%;
+            line-height: 100%;
             position: relative;
             display: inline-block;
-
-            span {
-                position: absolute;
-                right: 0;
-                bottom: -70px;
-                margin-top: 0px;
-                font-size: 30px;
-                font-weight: 100;
-                text-align: right;
-                white-space: nowrap;
-            }
         }
 
-        
+        h3 {
+            font-size: 24px;
+            font-weight: 100;
+            margin-bottom: 60px;
+            line-height: 100%;
+            margin-top: 10px;
+        }
 
         h4 {
             color: ${props => props.color};
@@ -82,39 +76,75 @@ const Project = styled.div`
     }
 
 
-        img {
-            order: ${props => props.index % 2 ? 2 : 1};
-            width: 50%;
-            height: auto;
-            object-fit: cover;
-            border-radius: 6px;
-            animation-delay: 1s;
-            transition: scale .3s ease;
+    img {
+        order: ${props => props.index % 2 ? 2 : 1};
+        width: 50%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 6px;
+        animation-delay: 1s;
+        transition: scale .3s ease;
 
-            &:hover {
-                animation: ${zoom} 1s ease-out forwards;
-            }
-            
+        &:hover {
+            animation: ${zoom} 1s ease-out forwards;
         }
+        
+    }
+
+    @media (max-width: ${dimensions.md}) {
+        flex-wrap: wrap;
+        padding: 10px 30px;
+        box-sizing: border-box;
+        margin: 100px auto;
+
+        .info {
+            width: 100%;
+            order: 1;
+
+            h3, p, h4 {
+                line-height: 100%;
+                text-align: ${props => props.index % 2 ? "left" : "right"};
+            }
+
+            h2 {
+                text-align: center;
+                margin: auto;
+                display: block;
+            }
+
+            a {
+                float: ${props => props.index % 2 ? "left" : "right"};
+            }
+        }
+
+        img {
+            width: 100%;
+            order: 2;
+        }
+    }
         
     
 `;
 
-function ProjectList({ theme }) {
+function ProjectList({ theme, language }) {
+    const { text } = require('../assets/' + language + "/projects");
+
+
     return (
         <Container color={theme.primary}>
             <h1>All projects</h1>
-            {items.map((item, index) => (
-                <Project index={index} color={theme.primary} key={index}>
+            {Object.entries(text).map((item, index) => (
+                <Project index={text} color={theme.primary} key={index}>
                     <div className='info'>
-                        <h2>{item.title} <span>{item.category}</span></h2>
+                        <h2>{item[1].title} </h2>
+                        <h3>{item[1].category}</h3>
 
-                        <h4>What's this?</h4>
-                        <p>{item.subtitle}</p>
-                        <Link to={item.to}>view website</Link>
+                        <h4>About</h4>
+                        <p>{item[1].subtitle}</p>
+                        <Link to={item[1].to}>view website</Link>
                     </div>
 
-                    <img src={"/image/projects/" + item.image + "/1.jpg"} alt={item.title + " homepage"} />
+                    <img src={"/image/projects/" + item[1].image + "/1.jpg"} alt={item[1].title + " homepage"} />
 
                 </Project>
             ))}
@@ -122,5 +152,13 @@ function ProjectList({ theme }) {
         </Container>
     )
 }
+const mapStateToProps = (state) => {
+    return {
+        language: state.application.language,
+    };
+};
 
-export default withTheme(ProjectList)
+export default connect(
+    mapStateToProps,
+    null
+)(withTheme(ProjectList));

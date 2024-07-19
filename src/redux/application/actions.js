@@ -12,3 +12,9 @@ export function setDarkTheme() {
     };
 }
 
+
+export function setLanguage(val) {
+    return {
+        type: types.SET_LANGUAGE, payload: val
+    };
+}

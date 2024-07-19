@@ -1,6 +1,7 @@
 import React from 'react'
 import styled, { withTheme, keyframes } from 'styled-components';
 import { dimensions, maxWidth, middleWidth } from '../helper';
+import { connect } from 'react-redux';
 
 const scroll = keyframes`
   0% {
@@ -19,6 +20,10 @@ const Container = styled.section`
     display: flex;
     flex-direction: column;
 
+    @media (max-width: ${dimensions.lg}) {
+        min-height: 30vh;
+    }
+
 `;
 
 const EmailContainer = styled.div`
@@ -33,7 +38,7 @@ const EmailContainer = styled.div`
     align-items: center;
 
     a {
-        font-size: clamp(40px, 10vw, 100px);
+        font-size: clamp(30px, 10vw, 100px);
         text-align: center;
         margin: auto;
         display: block;
@@ -88,7 +93,9 @@ const LinksContainer = styled.div`
     margin: auto;
     padding: 30px 20px;
     box-sizing: border-box;
+    flex-wrap: wrap;
 `;
+
 const Copyright = styled.p`
     font-size: 20px;
     margin: auto 0px;
@@ -96,6 +103,12 @@ const Copyright = styled.p`
     span {
         font-weight: bold;
         text-decoration: underline;
+    }
+
+    @media (max-width: ${dimensions.lg}) {
+        order: 2;
+        text-align: center;
+        width: 100%;
     }
 `;
 
@@ -113,14 +126,28 @@ const Social = styled.div`
         text-decoration: none;
         transition: opacity .3s linear;
         font-size: 20px;
-        line-height: 55px;
+        line-height: 100%;
         text-transform: uppercase;
         font-weight: 400;
         font-stretch: normal;
         font-style: normal;
-        line-height: 2.75;
-        letter-spacing: -0.92px;
         margin: 0px;
+    }
+
+    @media (max-width: ${dimensions.lg}) {
+        order: 1;
+        background-color: transparent;
+        justify-content: space-around;
+        width: 100%;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-bottom: 50px;
+
+        a {
+            color: ${({ theme }) => theme.primary};
+            font-size: 16px;
+
+        }
     }
 `;
 
@@ -132,6 +159,10 @@ const Background = styled.div`
     right: 0px;
     background-color: ${props => props.background};
     z-index: -1;
+
+    @media (max-width: ${dimensions.lg}) {
+        display: none;
+    }
 `;
 
 const Top = styled.div`
@@ -145,20 +176,23 @@ const Top = styled.div`
     text-align: right;
     cursor: pointer;
     font-size: 24px;
+    cursor: pointer;
+    z-index: 5;
 `;
 
 const year = new Date().getFullYear();
-function Footer({ theme }) {
+function Footer({ theme, language }) {
+    const sentence = { en: "let's work together", pt: "vamos construir juntos" }
     return (
         <Container>
-            <Top color={theme.primary} >top</Top>
+            <Top onClick={() => window.scrollTo(0, 0)} color={theme.primary} >top</Top>
 
 
             <EmailContainer color={theme.text}>
-                <a href='mailto:info@ruben-freitas.pt'>info@ruben-freitas.pt</a>
+                <a href='mailto:jrubenf98@gmail.com'>jrubenf98@gmail.com</a>
                 <ScrollingRow stroke={theme.primary} color={theme.background}>
-                    <p>let's work together</p>
-                    <p>let's work together</p>
+                    <p>{sentence[language]}</p>
+                    <p>{sentence[language]}</p>
                 </ScrollingRow>
             </EmailContainer>
 
@@ -180,10 +214,23 @@ function Footer({ theme }) {
                     <a href="https://scholar.google.com/citations?user=1xnrzDMAAAAJ" target="_blank" rel="noreferrer">
                         scholar
                     </a>
+
+                    <a href="https://www.linkedin.com/in/r%C3%BAben-freitas/" target="_blank" rel="noreferrer">
+                        linkedin
+                    </a>
                 </Social>
             </LinksContainer>
         </Container >
     )
 }
 
-export default withTheme(Footer)
+const mapStateToProps = (state) => {
+    return {
+        language: state.application.language,
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    null
+)(withTheme(Footer));

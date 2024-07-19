@@ -1,27 +1,31 @@
 import React from 'react'
 import ProjectPage from '../ProjectPage'
+import { connect } from 'react-redux';
 
-function Plaza() {
+function Plaza(props) {
+    const { text, fields } = require('../../assets/' + props.language + "/projects");
+    const content = text.plaza
+
     return (
         <ProjectPage
-            color="#C49A4E"
-            title="Plaza II"
-            subtitle="Interaquatic dashboard that tries to understand how the ocean works, through Mobile Apps, IoT devices, AI algorithms and interactive environments."
-            imageSrc="/image/projects/plaza/"
+            color={content.color}
+            title={content.title}
+            subtitle={content.subtitle}
+            imageSrc={"/image/projects/" + content.image + "/"}
             motivation={(
                 <div className='row'>
                     <div className='column'>
-                        <h3>What's this?</h3>
-                        <p>Oceans are a crucial driver of Earth ecosystems. They cover three-quarters of the planet's surface, contain 97% of the Earth's water and absorb 30% of the carbon emissions acting as a buffer for global warming.</p>
+                        <h3>{fields.about}</h3>
+                        <p>{content.about}</p>
 
-                        <a href='https://edificioplaza2.com/' target="_blank">view website</a>
+                        <a href={content.url} target="_blank">{fields.link}</a>
                     </div>
                     <div className='column'>
-                        <h3>Client</h3>
-                        <p>Plaza II</p>
+                        <h3>{fields.client}</h3>
+                        <p>{content.title}</p>
 
-                        <h3>Focus</h3>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                        <h3>{fields.focus}</h3>
+                        <p>{content.focus} </p>
                     </div>
                 </div>
             )}
@@ -29,4 +33,13 @@ function Plaza() {
     )
 }
 
-export default Plaza
+const mapStateToProps = (state) => {
+    return {
+        language: state.application.language,
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    null
+)(Plaza);

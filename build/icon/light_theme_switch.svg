@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="50.525"
+   height="50.525"
+   viewBox="0 0 50.525 50.525"
+   version="1.1"
+   id="svg12"
+   sodipodi:docname="light_theme_switch.svg"
+   inkscape:version="1.1.2 (1:1.1+202202050950+0a00cf5339)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview14"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="14.230578"
+     inkscape:cx="25.262501"
+     inkscape:cy="25.227365"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="0"
+     inkscape:window-y="34"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg12" />
+  <defs
+     id="defs4">
+    <style
+       id="style2">.a{fill:#fff;}</style>
+  </defs>
+  <g
+     transform="translate(74.758 136.016) rotate(-135)"
+     id="g10"
+     style="fill:#000000">
+    <path
+       class="a"
+       d="M166.73,109.582a12.876,12.876,0,0,0,12.861,12.861V96.72a12.876,12.876,0,0,0-12.861,12.861Z"
+       transform="translate(-66.278 -66.266)"
+       id="path6"
+       style="fill:#000000" />
+    <path
+       class="a"
+       d="M113.313,25.453a17.863,17.863,0,1,0,17.863,17.863A17.865,17.865,0,0,0,113.313,25.453Zm0,32.868a15.005,15.005,0,1,1,15.005-15.005A15.021,15.021,0,0,1,113.313,58.321Z"
+       id="path8"
+       style="fill:#000000" />
+  </g>
+</svg>
